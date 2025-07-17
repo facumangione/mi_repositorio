@@ -1,12 +1,15 @@
 # sistema_biometrico.py
-from multiprocessing import Process, Pipe, Queue
+from multiprocessing import Process, Pipe, Queue, set_start_method
 import time
 import datetime
 from collections import deque
 import statistics
 import hashlib
 import json
+import os
 
+#--------- RUTA DEL ARCHIVO ---------
+blockchain_path = "blockchain.json"
 
 # ---------- ANALIZADORES ----------
 def analizador(nombre, conn, salida):
@@ -20,20 +23,18 @@ def analizador(nombre, conn, salida):
 
             timestamp = data["timestamp"]
 
-            # Extraer valor según tipo
             if nombre == "frecuencia":
                 valor = data["frecuencia"]
             elif nombre == "presion":
-                valor = (data["presion"][0] + data["presion"][1]) / 2  # promedio sist/diast
+                valor = (data["presion"][0] + data["presion"][1]) / 2
             elif nombre == "oxigeno":
                 valor = data["oxigeno"]
             else:
-                continue  # Tipo no reconocido
+                continue
 
             ventana.append(valor)
 
-            # Calcular estadísticas si hay suficientes datos
-            if len(ventana) >= 2:  # evitamos error con stdev(<2)
+            if len(ventana) >= 2:
                 media = round(statistics.mean(ventana), 2)
                 desv = round(statistics.stdev(ventana), 2)
             else:
@@ -70,9 +71,8 @@ def verificador(queue_f, queue_p, queue_o):
         if res_f == "FIN" or res_p == "FIN" or res_o == "FIN":
             break
 
-        timestamp = res_f["timestamp"]  # asumimos sincronía
+        timestamp = res_f["timestamp"]
 
-        # Validaciones simples
         alerta = False
         if res_f["media"] >= 200:
             alerta = True
@@ -94,12 +94,18 @@ def verificador(queue_f, queue_p, queue_o):
             "prev_hash": prev_hash
         }
 
-        # Calcular hash
         nuevo_bloque["hash"] = calcular_hash(prev_hash, datos, timestamp)
 
-        # Encadenar
         blockchain.append(nuevo_bloque)
         prev_hash = nuevo_bloque["hash"]
+
+        # Guardar en blockchain.json
+        try:
+            with open(blockchain_path, "w") as f:
+                json.dump(blockchain, f, indent=4)
+            print(" 💾 Bloque guardado en blockchain.json")
+        except Exception as e:
+            print(f" ❌ Error al guardar el bloque: {e}")
 
         # Mostrar resumen
         print(f"\n[🔗 BLOQUE {bloque_idx}] Hash: {nuevo_bloque['hash']}")
@@ -111,7 +117,7 @@ def verificador(queue_f, queue_p, queue_o):
 
 # ---------- GENERADOR PRINCIPAL ----------
 def generador(envios):
-    for i in range(5):  # solo 5 datos para prueba inicial
+    for i in range(5):
         paquete = {
             "timestamp": datetime.datetime.now().isoformat(timespec='seconds'),
             "frecuencia": 80 + i,
@@ -126,10 +132,8 @@ def generador(envios):
     for conn in envios:
         conn.send("FIN")
 
-
 # ---------- MAIN ----------
 if __name__ == "__main__":
-    from multiprocessing import set_start_method
     set_start_method("fork")  # importante para UNIX
 
     # Pipes para cada analizador
