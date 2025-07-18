@@ -1,6 +1,6 @@
 [
     {
-        "timestamp": "2025-07-17T20:45:28",
+        "timestamp": "2025-07-18T20:02:37",
         "datos": {
             "frecuencia": {
                 "media": 80,
@@ -17,10 +17,10 @@
         },
         "alerta": false,
         "prev_hash": "0",
-        "hash": "f99d3502d1983e5328805b16cbd417f1d6213bd5113cea6799d5cb5368cedbe3"
+        "hash": "8287ae1e1e44aabd610af5789f974366018fec30250db56466816fc613d61dba"
     },
     {
-        "timestamp": "2025-07-17T20:45:29",
+        "timestamp": "2025-07-18T20:02:38",
         "datos": {
             "frecuencia": {
                 "media": 80.5,
@@ -36,11 +36,11 @@
             }
         },
         "alerta": false,
-        "prev_hash": "f99d3502d1983e5328805b16cbd417f1d6213bd5113cea6799d5cb5368cedbe3",
-        "hash": "99d651df0c64f8f242822d7d451f1c33caaec37dc3f39ea3c4b649aa0f0f7e70"
+        "prev_hash": "8287ae1e1e44aabd610af5789f974366018fec30250db56466816fc613d61dba",
+        "hash": "3bdebdd670d2d192901b8b5329d57920d9bb74e2d5434e437d6df719d8e3b103"
     },
     {
-        "timestamp": "2025-07-17T20:45:30",
+        "timestamp": "2025-07-18T20:02:39",
         "datos": {
             "frecuencia": {
                 "media": 81,
@@ -56,11 +56,11 @@
             }
         },
         "alerta": false,
-        "prev_hash": "99d651df0c64f8f242822d7d451f1c33caaec37dc3f39ea3c4b649aa0f0f7e70",
-        "hash": "38bade37c1a64a2121abe660ba3583efd729809b97d73c12597652f2455b1c60"
+        "prev_hash": "3bdebdd670d2d192901b8b5329d57920d9bb74e2d5434e437d6df719d8e3b103",
+        "hash": "c1b6c6354b31af2a80ec2188ae97331d9a594323226329fbfd9198ae0757b989"
     },
     {
-        "timestamp": "2025-07-17T20:45:31",
+        "timestamp": "2025-07-18T20:02:40",
         "datos": {
             "frecuencia": {
                 "media": 81.5,
@@ -76,11 +76,11 @@
             }
         },
         "alerta": false,
-        "prev_hash": "38bade37c1a64a2121abe660ba3583efd729809b97d73c12597652f2455b1c60",
-        "hash": "68c7931e5803e1f2144f2070bcda11d1f1c5752346950fd1905d8c7600c8da53"
+        "prev_hash": "c1b6c6354b31af2a80ec2188ae97331d9a594323226329fbfd9198ae0757b989",
+        "hash": "570991ec0cf5b78b0cc37fbfe90d36a37f3b3a012eeffab7881a0b1414e08f8a"
     },
     {
-        "timestamp": "2025-07-17T20:45:32",
+        "timestamp": "2025-07-18T20:02:41",
         "datos": {
             "frecuencia": {
                 "media": 82,
@@ -96,7 +96,7 @@
             }
         },
         "alerta": false,
-        "prev_hash": "68c7931e5803e1f2144f2070bcda11d1f1c5752346950fd1905d8c7600c8da53",
-        "hash": "cbce9a22ff3fbaca3cba172df4597501fe417e4dd4ccdb98f483af53a1bba210"
+        "prev_hash": "570991ec0cf5b78b0cc37fbfe90d36a37f3b3a012eeffab7881a0b1414e08f8a",
+        "hash": "14a1218434640f486344b313ef0023b3e12b0f82c262357c612251fc6ba74329"
     }
 ]
