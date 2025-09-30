@@ -1,5 +1,5 @@
 # Autor
-Facundo Jesús Mangione — Facultad de Ingeniería en Informática — Universidad de Mendoza
+Facundo Mangione — Facultad de Ingeniería en Informática — Universidad de Mendoza
 
 ## Sistema Concurrente de Análisis Biométrico con Cadena de Bloques Local
 
@@ -77,4 +77,15 @@ Archivo principal que implementa los siguientes módulos:
 ### 1. Ejecutar el sistema principal:
 
 ```bash
-python sistema_biometrico.py
+python3 sistema_biometrico.py
+
+
+
+
+
+
+
+
+
+
+https://hub.docker.com/r/gtstef/filebrowser

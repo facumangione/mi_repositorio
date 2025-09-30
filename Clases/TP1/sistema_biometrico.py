@@ -104,16 +104,16 @@ def verificador(queue_f, queue_p, queue_o):
         try:
             with open(blockchain_path, "w") as f:
                 json.dump(blockchain, f, indent=4)
-            print(" 💾 Bloque guardado en blockchain.json")
+            print(" Bloque guardado en blockchain.json")
         except Exception as e:
-            print(f" ❌ Error al guardar el bloque: {e}")
+            print(f"  Error al guardar el bloque: {e}")
 
         # Mostrar resumen
-        print(f"\n[🔗 BLOQUE {bloque_idx}] Hash: {nuevo_bloque['hash']}")
+        print(f"\n[ BLOQUE {bloque_idx}] Hash: {nuevo_bloque['hash']}")
         if alerta:
-            print(" ⚠️  ALERTA detectada en los datos.")
+            print("  ALERTA detectada en los datos.")
         else:
-            print(" ✅  Datos dentro de parámetros normales.")
+            print("  Datos dentro de parámetros normales.")
         bloque_idx += 1
 
 # ---------- GENERADOR PRINCIPAL ----------
@@ -177,7 +177,7 @@ if __name__ == "__main__":
 
     print("[SISTEMA] Todos los procesos finalizaron.")
 
-# verificar_cadena.py
+# verificar_cadena
 
 BLOCKCHAIN_PATH = "blockchain.json"
 REPORTE_PATH = "reporte.txt"
@@ -191,7 +191,7 @@ def verificar_cadena():
         with open(BLOCKCHAIN_PATH, "r") as f:
             cadena = json.load(f)
     except FileNotFoundError:
-        print("❌ Archivo blockchain.json no encontrado.")
+        print("Archivo blockchain.json no encontrado.")
         return
 
     bloques_invalidos = []
@@ -220,9 +220,9 @@ def verificar_cadena():
         suma_pres += datos["presion"]["media"]
         suma_oxi += datos["oxigeno"]["media"]
 
-    print(f"\n📄 Total de bloques: {total_bloques}")
-    print(f"⚠️  Bloques con alertas: {alertas}")
-    print(f"🔗 Bloques corruptos: {bloques_invalidos if bloques_invalidos else 'ninguno'}")
+    print(f"\n Total de bloques: {total_bloques}")
+    print(f" Bloques con alertas: {alertas}")
+    print(f" Bloques corruptos: {bloques_invalidos if bloques_invalidos else 'ninguno'}")
 
     prom_frec = round(suma_frec / total_bloques, 2)
     prom_pres = round(suma_pres / total_bloques, 2)
@@ -236,7 +236,7 @@ def verificar_cadena():
         f.write(f"Promedio Presión: {prom_pres}\n")
         f.write(f"Promedio Oxígeno: {prom_oxi}\n")
 
-    print(f"\n📝 Reporte generado en '{REPORTE_PATH}'.")
+    print(f"\n Reporte generado en '{REPORTE_PATH}'.")
 
 if __name__ == "__main__":
     verificar_cadena()
