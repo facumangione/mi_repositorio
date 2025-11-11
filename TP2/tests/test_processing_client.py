@@ -1,12 +1,4 @@
 #!/usr/bin/env python3
-"""
-Cliente de prueba para el servidor de procesamiento.
-Envía diferentes tipos de tareas y muestra los resultados.
-
-Uso:
-    python test_processing_client.py
-    python test_processing_client.py --host localhost --port 8001
-"""
 import sys
 import os
 import socket
@@ -19,9 +11,8 @@ from common.protocol import Protocol, MessageType, create_request
 
 
 def test_ping(host, port):
-    """Test de ping/pong."""
     print("\n" + "=" * 60)
-    print("📡 TEST 1: PING/PONG")
+    print("TEST 1: PING/PONG")
     print("=" * 60)
     
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -29,25 +20,24 @@ def test_ping(host, port):
     
     # Enviar ping
     ping = {"type": MessageType.PING}
-    print(f"📤 Enviando: {ping}")
+    print(f"Enviando: {ping}")
     Protocol.send_message_sync(sock, ping)
     
     # Recibir respuesta
     response = Protocol.receive_message_sync(sock)
-    print(f"📥 Respuesta: {response}")
+    print(f" Respuesta: {response}")
     
     sock.close()
     
     if response.get('success'):
-        print("✅ Test PING/PONG: OK")
+        print(" Test PING/PONG: OK")
     else:
-        print("❌ Test PING/PONG: FAILED")
+        print(" Test PING/PONG: FAILED")
     
     return response.get('success', False)
 
 
 def test_performance(host, port, url='http://example.com'):
-    """Test de análisis de rendimiento."""
     print("\n" + "=" * 60)
     print(f"⚡ TEST 2: ANÁLISIS DE RENDIMIENTO")
     print("=" * 60)
@@ -59,39 +49,38 @@ def test_performance(host, port, url='http://example.com'):
     
     # Enviar request
     request = create_request('performance_request', url)
-    print(f"📤 Enviando request de performance...")
+    print(f"Enviando request de performance...")
     Protocol.send_message_sync(sock, request)
     
     # Recibir respuesta
-    print("⏳ Esperando respuesta...")
+    print(" Esperando respuesta...")
     response = Protocol.receive_message_sync(sock)
     
     sock.close()
     
     if response.get('success'):
         result = response.get('result', {})
-        print(f"\n✅ Análisis completado:")
-        print(f"   ⏱️  Tiempo de carga: {result.get('load_time_ms', 0):.2f} ms")
-        print(f"   📦 Tamaño total: {result.get('total_size_kb', 0):.2f} KB")
-        print(f"   🔗 Número de requests: {result.get('num_requests', 0)}")
-        print(f"   📊 Status code: {result.get('status_code', 0)}")
+        print(f"\n Análisis completado:")
+        print(f"     Tiempo de carga: {result.get('load_time_ms', 0):.2f} ms")
+        print(f"    Tamaño total: {result.get('total_size_kb', 0):.2f} KB")
+        print(f"    Número de requests: {result.get('num_requests', 0)}")
+        print(f"   Status code: {result.get('status_code', 0)}")
         
         resources = result.get('resources', {})
         print(f"\n   Recursos:")
-        print(f"      📜 Scripts: {resources.get('scripts', 0)}")
-        print(f"      🎨 Stylesheets: {resources.get('stylesheets', 0)}")
-        print(f"      🖼️  Imágenes: {resources.get('images', 0)}")
+        print(f"      Scripts: {resources.get('scripts', 0)}")
+        print(f"      tylesheets: {resources.get('stylesheets', 0)}")
+        print(f"      Imágenes: {resources.get('images', 0)}")
         
         return True
     else:
-        print(f"❌ Error: {response.get('error', 'Unknown error')}")
+        print(f"Error: {response.get('error', 'Unknown error')}")
         return False
 
 
 def test_images(host, port):
-    """Test de procesamiento de imágenes."""
     print("\n" + "=" * 60)
-    print("🖼️  TEST 3: PROCESAMIENTO DE IMÁGENES")
+    print(" TEST 3: PROCESAMIENTO DE IMÁGENES")
     print("=" * 60)
     
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -113,17 +102,17 @@ def test_images(host, port):
         }
     }
     
-    print(f"📤 Enviando request para procesar {len(image_urls)} imágenes...")
+    print(f" Enviando request para procesar {len(image_urls)} imágenes...")
     Protocol.send_message_sync(sock, request)
     
-    print("⏳ Procesando imágenes...")
+    print(" Procesando imágenes...")
     response = Protocol.receive_message_sync(sock)
     
     sock.close()
     
     if response.get('success'):
         results = response.get('result', [])
-        print(f"\n✅ Procesadas {len(results)} imágenes:")
+        print(f"\nProcesadas {len(results)} imágenes:")
         
         for i, img in enumerate(results, 1):
             print(f"\n   Imagen {i}:")
@@ -137,43 +126,42 @@ def test_images(host, port):
         
         return True
     else:
-        print(f"❌ Error: {response.get('error', 'Unknown error')}")
+        print(f"Error: {response.get('error', 'Unknown error')}")
         return False
 
 
 def test_screenshot(host, port, url='http://example.com'):
-    """Test de captura de screenshot."""
     print("\n" + "=" * 60)
-    print("📸 TEST 4: CAPTURA DE SCREENSHOT")
+    print(" TEST 4: CAPTURA DE SCREENSHOT")
     print("=" * 60)
     print(f"URL: {url}")
-    print("⚠️  Nota: Requiere Selenium + ChromeDriver instalado")
+    print("  Nota: Requiere Selenium + ChromeDriver instalado")
     
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.settimeout(60)  # Screenshots pueden tardar más
     sock.connect((host, port))
     
     request = create_request('screenshot_request', url, timeout=15)
-    print(f"📤 Enviando request de screenshot...")
+    print(f" Enviando request de screenshot...")
     Protocol.send_message_sync(sock, request)
     
-    print("⏳ Capturando screenshot (puede tardar)...")
+    print("Capturando screenshot (puede tardar)...")
     response = Protocol.receive_message_sync(sock)
     
     sock.close()
     
     if response.get('success'):
         screenshot_b64 = response.get('result', '')
-        print(f"\n✅ Screenshot capturado:")
+        print(f"\n Screenshot capturado:")
         print(f"   Tamaño: {len(screenshot_b64)} chars (base64)")
         print(f"   ~{len(screenshot_b64) * 3 // 4 // 1024} KB")
         return True
     else:
         error = response.get('error', 'Unknown error')
-        print(f"❌ Error: {error}")
+        print(f"Error: {error}")
         
         if 'Selenium' in error or 'WebDriver' in error:
-            print("\n💡 Para habilitar screenshots:")
+            print("\n Para habilitar screenshots:")
             print("   pip install selenium")
             print("   # Instalar ChromeDriver o usar screenshot fallback")
         
@@ -183,7 +171,7 @@ def test_screenshot(host, port, url='http://example.com'):
 def run_all_tests(host, port, url='http://example.com'):
     """Ejecuta todos los tests."""
     print("\n" + "=" * 60)
-    print("🧪 SUITE DE TESTS - SERVIDOR DE PROCESAMIENTO")
+    print("SUITE DE TESTS - SERVIDOR DE PROCESAMIENTO")
     print("=" * 60)
     print(f"Servidor: {host}:{port}")
     print(f"URL de prueba: {url}")
@@ -209,21 +197,21 @@ def run_all_tests(host, port, url='http://example.com'):
         results['screenshot'] = test_screenshot(host, port, url)
         
     except ConnectionRefusedError:
-        print("\n❌ ERROR: No se pudo conectar al servidor")
+        print("\n ERROR: No se pudo conectar al servidor")
         print(f"   Asegúrate de que el servidor esté corriendo en {host}:{port}")
         return False
     
     except Exception as e:
-        print(f"\n❌ ERROR INESPERADO: {e}")
+        print(f"\n ERROR INESPERADO: {e}")
         return False
     
     # Resumen
     print("\n" + "=" * 60)
-    print("📊 RESUMEN DE TESTS")
+    print("RESUMEN DE TESTS")
     print("=" * 60)
     
     for test_name, passed in results.items():
-        status = "✅ PASS" if passed else "❌ FAIL"
+        status = "PASS" if passed else "❌ FAIL"
         print(f"{test_name.upper():.<20} {status}")
     
     total_passed = sum(results.values())

@@ -1,7 +1,4 @@
-"""
-Generación de screenshots usando Selenium.
-Este worker se ejecuta en un proceso separado (CPU/IO-bound).
-"""
+
 import base64
 import time
 import logging
@@ -11,20 +8,6 @@ logger = logging.getLogger(__name__)
 
 
 def generate_screenshot(url: str, options: Dict[str, Any] = None) -> str:
-    """
-    Genera screenshot de la URL y retorna imagen en base64.
-    Esta función se ejecuta en un proceso separado.
-    
-    Args:
-        url: URL de la página a capturar
-        options: Opciones adicionales (timeout, resolution, etc.)
-        
-    Returns:
-        str: Imagen PNG en base64
-        
-    Raises:
-        Exception: Si no se puede generar el screenshot
-    """
     if options is None:
         options = {}
     
@@ -46,7 +29,6 @@ def generate_screenshot(url: str, options: Dict[str, Any] = None) -> str:
 
 
 def _generate_screenshot_selenium(url: str, timeout: int, width: int, height: int) -> str:
-    """Genera screenshot usando Selenium."""
     from selenium import webdriver
     from selenium.webdriver.chrome.options import Options
     from selenium.webdriver.chrome.service import Service
@@ -91,9 +73,6 @@ def _generate_screenshot_selenium(url: str, timeout: int, width: int, height: in
 
 
 def _generate_screenshot_fallback(url: str, width: int, height: int) -> str:
-    """
-    Fallback: genera un screenshot "dummy" cuando Selenium no está disponible.
-    """
     from PIL import Image, ImageDraw, ImageFont
     import io
     

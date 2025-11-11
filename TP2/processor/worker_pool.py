@@ -1,7 +1,4 @@
-"""
-Pool de workers para procesamiento paralelo.
-Usa concurrent.futures.ProcessPoolExecutor para tareas CPU-bound.
-"""
+
 import os
 import logging
 from concurrent.futures import ProcessPoolExecutor, as_completed, TimeoutError
@@ -11,33 +8,16 @@ logger = logging.getLogger(__name__)
 
 
 class WorkerPool:
-    """
-    Gestiona pool de procesos para tareas CPU-bound.
-    Utiliza ProcessPoolExecutor de concurrent.futures.
-    """
+
     
     def __init__(self, num_processes: Optional[int] = None):
-        """
-        Inicializa el pool de workers.
-        
-        Args:
-            num_processes: Número de procesos. Si None, usa CPU count.
-        """
+
         self.num_processes = num_processes or os.cpu_count()
         self.executor = ProcessPoolExecutor(max_workers=self.num_processes)
         logger.info(f"Pool inicializado con {self.num_processes} procesos")
     
     def process_task(self, task: Dict[str, Any]) -> Dict[str, Any]:
-        """
-        Procesa tarea según su tipo.
-        Ejecuta en proceso separado para no bloquear.
-        
-        Args:
-            task: Diccionario con type, url y data
-            
-        Returns:
-            dict: Resultado del procesamiento
-        """
+
         task_type = task.get('type')
         url = task.get('url', '')
         data = task.get('data', {})
@@ -95,15 +75,6 @@ class WorkerPool:
             }
     
     def _process_batch(self, task: Dict[str, Any]) -> Dict[str, Any]:
-        """
-        Procesa múltiples tareas en paralelo.
-        
-        Args:
-            task: Tarea batch con lista de subtareas
-            
-        Returns:
-            dict: Resultados de todas las subtareas
-        """
         subtasks = task.get('data', {}).get('tasks', [])
         results = {}
         
@@ -127,10 +98,7 @@ class WorkerPool:
         return results
     
     def _execute_subtask(self, subtask: Dict[str, Any]) -> Dict[str, Any]:
-        """
-        Ejecuta una subtarea individual.
-        Este método se ejecuta en un proceso separado.
-        """
+
         # Reutilizar la lógica de process_task pero sin recursión infinita
         task_type = subtask.get('type')
         
@@ -144,12 +112,6 @@ class WorkerPool:
         return {"error": "Subtask type not implemented"}
     
     def shutdown(self, wait: bool = True):
-        """
-        Cierra el pool de procesos.
-        
-        Args:
-            wait: Si True, espera a que terminen las tareas pendientes
-        """
         logger.info("Cerrando pool de procesos...")
         self.executor.shutdown(wait=wait)
         logger.info("Pool cerrado")
@@ -165,10 +127,6 @@ class WorkerPool:
 
 # Función helper para testing
 def test_worker_function(n: int) -> int:
-    """
-    Función de prueba que simula trabajo CPU-bound.
-    Calcula suma de cuadrados hasta n.
-    """
     import time
     time.sleep(0.1)  # Simular trabajo
     return sum(i * i for i in range(n))

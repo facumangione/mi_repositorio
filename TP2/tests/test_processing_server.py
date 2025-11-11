@@ -18,14 +18,12 @@ from common.protocol import Protocol, MessageType, create_request
 # ==================== TESTS DEL WORKER POOL ====================
 
 def test_worker_pool_initialization():
-    """Test de inicialización del pool."""
     pool = WorkerPool(num_processes=2)
     assert pool.num_processes == 2
     pool.shutdown()
 
 
 def test_worker_pool_cpu_count():
-    """Test que usa CPU count por defecto."""
     import os
     pool = WorkerPool()
     assert pool.num_processes == os.cpu_count()
@@ -33,14 +31,12 @@ def test_worker_pool_cpu_count():
 
 
 def test_worker_function():
-    """Test de función worker simple."""
     result = test_worker_function(100)
     expected = sum(i * i for i in range(100))
     assert result == expected
 
 
 def test_pool_execute_task():
-    """Test de ejecución de tarea en el pool."""
     with WorkerPool(num_processes=2) as pool:
         # Ejecutar función de test
         future = pool.executor.submit(test_worker_function, 50)
@@ -50,7 +46,6 @@ def test_pool_execute_task():
 
 
 def test_pool_multiple_tasks():
-    """Test de múltiples tareas concurrentes."""
     with WorkerPool(num_processes=4) as pool:
         # Enviar múltiples tareas
         futures = []
@@ -68,7 +63,6 @@ def test_pool_multiple_tasks():
 
 
 def test_pool_context_manager():
-    """Test de pool como context manager."""
     with WorkerPool(num_processes=2) as pool:
         assert pool.num_processes == 2
     
@@ -78,7 +72,6 @@ def test_pool_context_manager():
 # ==================== TESTS DE PERFORMANCE WORKER ====================
 
 def test_analyze_performance_basic():
-    """Test básico de análisis de rendimiento."""
     result = analyze_performance('http://example.com')
     
     assert 'load_time_ms' in result
@@ -91,20 +84,17 @@ def test_analyze_performance_basic():
 
 
 def test_analyze_performance_invalid_url():
-    """Test con URL inválida."""
     with pytest.raises(Exception):
         analyze_performance('http://this-domain-does-not-exist-12345.com')
 
 
 def test_analyze_performance_timeout():
-    """Test de timeout."""
     # URL que tarda mucho o no responde
     with pytest.raises(Exception):
         analyze_performance('http://httpbin.org/delay/20', {'timeout': 1})
 
 
 def test_performance_metrics_structure():
-    """Test de estructura de métricas."""
     result = analyze_performance('http://example.com')
     
     # Verificar estructura
@@ -122,7 +112,6 @@ def test_performance_metrics_structure():
 # ==================== TESTS DE IMAGE PROCESSOR ====================
 
 def test_create_thumbnail():
-    """Test de creación de thumbnail."""
     from PIL import Image
     
     # Crear imagen de prueba
@@ -145,7 +134,6 @@ def test_create_thumbnail():
 
 
 def test_extract_image_metadata():
-    """Test de extracción de metadata."""
     from PIL import Image
     
     img = Image.new('RGB', (100, 100), color='blue')
@@ -156,7 +144,6 @@ def test_extract_image_metadata():
 
 
 def test_process_images_empty_list():
-    """Test con lista vacía."""
     from processor.image_processor import process_images
     
     result = process_images([])
@@ -165,7 +152,6 @@ def test_process_images_empty_list():
 
 @pytest.mark.slow
 def test_process_images_real():
-    """Test con imagen real (requiere internet)."""
     from processor.image_processor import process_images
     
     # Imagen de prueba
@@ -184,11 +170,7 @@ def test_process_images_real():
 
 # ==================== TESTS DE COMUNICACIÓN CON SERVIDOR ====================
 
-def test_server_ping():
-    """Test de ping al servidor (requiere servidor corriendo)."""
-    # Este test asume que hay un servidor corriendo
-    # Si no hay servidor, se saltará
-    
+def test_server_ping():    
     try:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.settimeout(1)
@@ -212,7 +194,6 @@ def test_server_ping():
 
 @pytest.mark.integration
 def test_performance_request():
-    """Test de request de performance (requiere servidor)."""
     try:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.settimeout(30)
@@ -241,7 +222,6 @@ def test_performance_request():
 # ==================== TESTS DE WORKER POOL CON TASKS ====================
 
 def test_process_performance_task():
-    """Test de procesamiento de tarea de performance."""
     pool = WorkerPool(num_processes=2)
     
     task = {
