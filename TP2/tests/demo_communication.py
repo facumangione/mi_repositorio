@@ -64,7 +64,6 @@ async def handle_client(reader, writer):
 
 
 async def run_server(host='127.0.0.1', port=8888):
-    """Ejecuta el servidor de demostración."""
     print("=" * 60)
     print("SERVIDOR DE DEMOSTRACIÓN")
     print("=" * 60)
@@ -158,7 +157,6 @@ async def run_client(host='127.0.0.1', port=8888):
 
 
 async def send_shutdown(host='127.0.0.1', port=8888):
-    """Envía comando de shutdown al servidor."""
     print(" Enviando comando de shutdown...")
     
     try:
