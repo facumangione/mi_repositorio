@@ -1,120 +1,125 @@
-import os
+"""
+Generación de screenshots usando Selenium.
+Este worker se ejecuta en un proceso separado (CPU/IO-bound).
+"""
+import base64
+import time
 import logging
-from concurrent.futures import ProcessPoolExecutor, as_completed, TimeoutError
 from typing import Dict, Any, Optional
 
 logger = logging.getLogger(__name__)
 
 
-class WorkerPool:
+def generate_screenshot(url: str, options: Dict[str, Any] = None) -> str:
+    """
+    Genera screenshot de la URL y retorna imagen en base64.
+    Esta función se ejecuta en un proceso separado.
     
-    def __init__(self, num_processes: Optional[int] = None):
-        self.num_processes = num_processes or os.cpu_count()
-        self.executor = ProcessPoolExecutor(max_workers=self.num_processes)
-        logger.info(f"Pool inicializado con {self.num_processes} procesos")
+    Args:
+        url: URL de la página a capturar
+        options: Opciones adicionales (timeout, resolution, etc.)
+        
+    Returns:
+        str: Imagen PNG en base64
+        
+    Raises:
+        Exception: Si no se puede generar el screenshot
+    """
+    if options is None:
+        options = {}
     
-    def process_task(self, task: Dict[str, Any]) -> Dict[str, Any]:
-        task_type = task.get('type')
-        url = task.get('url', '')
-        data = task.get('data', {})
-        
-        logger.info(f"Procesando tarea: {task_type} para {url}")
-        
-        try:
-            if task_type == 'screenshot_request':
-                from processor.screenshot import generate_screenshot
-                future = self.executor.submit(generate_screenshot, url, data)
-                result = future.result(timeout=30)
-                
-            elif task_type == 'performance_request':
-                from processor.performance import analyze_performance
-                future = self.executor.submit(analyze_performance, url, data)
-                result = future.result(timeout=30)
-                
-            elif task_type == 'images_request':
-                from processor.image_processor import process_images
-                image_urls = data.get('image_urls', [])
-                max_images = data.get('max_images', 5)
-                future = self.executor.submit(process_images, image_urls, max_images)
-                result = future.result(timeout=30)
-            
-            elif task_type == 'batch_request':
-                result = self._process_batch(task)
-                
-            else:
-                logger.warning(f"Tipo de tarea desconocido: {task_type}")
-                return {
-                    "success": False,
-                    "error": f"Unknown task type: {task_type}"
-                }
-            
-            logger.info(f"Tarea completada: {task_type}")
-            return {
-                "success": True,
-                "result": result
-            }
-            
-        except TimeoutError:
-            logger.error(f"Timeout procesando {task_type} para {url}")
-            return {
-                "success": False,
-                "error": f"Timeout after 30 seconds"
-            }
-            
-        except Exception as e:
-            logger.error(f"Error procesando {task_type}: {e}", exc_info=True)
-            return {
-                "success": False,
-                "error": str(e)
-            }
+    timeout = options.get('timeout', 10)
+    width = options.get('width', 1920)
+    height = options.get('height', 1080)
     
-    def _process_batch(self, task: Dict[str, Any]) -> Dict[str, Any]:
-        subtasks = task.get('data', {}).get('tasks', [])
-        results = {}
+    logger.info(f"Generando screenshot de {url}")
+    
+    # Intentar usar Selenium primero
+    try:
+        return _generate_screenshot_selenium(url, timeout, width, height)
+    except ImportError:
+        logger.warning("Selenium no disponible, usando fallback")
+        return _generate_screenshot_fallback(url, width, height)
+    except Exception as e:
+        logger.error(f"Error con Selenium: {e}, usando fallback")
+        return _generate_screenshot_fallback(url, width, height)
+
+
+def _generate_screenshot_selenium(url: str, timeout: int, width: int, height: int) -> str:
+    """Genera screenshot usando Selenium."""
+    from selenium import webdriver
+    from selenium.webdriver.chrome.options import Options
+    from selenium.webdriver.chrome.service import Service
+    from selenium.common.exceptions import TimeoutException, WebDriverException
+    
+    driver = None
+    
+    try:
+        # Configurar opciones de Chrome
+        chrome_options = Options()
+        chrome_options.add_argument('--headless')
+        chrome_options.add_argument('--no-sandbox')
+        chrome_options.add_argument('--disable-dev-shm-usage')
+        chrome_options.add_argument('--disable-gpu')
+        chrome_options.add_argument(f'--window-size={width},{height}')
+        chrome_options.add_argument('--disable-blink-features=AutomationControlled')
+        chrome_options.add_argument('--user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36')
         
-        futures = {}
-        for subtask in subtasks:
-            task_id = subtask.get('id', str(len(futures)))
-            future = self.executor.submit(self._execute_subtask, subtask)
-            futures[task_id] = future
+        # Inicializar driver
+        driver = webdriver.Chrome(options=chrome_options)
+        driver.set_page_load_timeout(timeout)
         
-        for task_id, future in futures.items():
+        # Cargar página
+        driver.get(url)
+        
+        # Esperar un poco para que renderice
+        time.sleep(2)
+        
+        # Capturar screenshot
+        screenshot = driver.get_screenshot_as_png()
+        screenshot_b64 = base64.b64encode(screenshot).decode('utf-8')
+        
+        logger.info(f"Screenshot generado: {len(screenshot_b64)} bytes (base64)")
+        return screenshot_b64
+        
+    finally:
+        if driver:
             try:
-                results[task_id] = future.result(timeout=30)
-            except Exception as e:
-                results[task_id] = {
-                    "success": False,
-                    "error": str(e)
-                }
-        
-        return results
-    
-    def _execute_subtask(self, subtask: Dict[str, Any]) -> Dict[str, Any]:
-        task_type = subtask.get('type')
-        
-        if task_type == 'screenshot_request':
-            from processor.screenshot import generate_screenshot
-            url = subtask.get('url', '')
-            data = subtask.get('data', {})
-            return generate_screenshot(url, data)
-        
-        return {"error": "Subtask type not implemented"}
-    
-    def shutdown(self, wait: bool = True):
-        logger.info("Cerrando pool de procesos...")
-        self.executor.shutdown(wait=wait)
-        logger.info("Pool cerrado")
-    
-    def __enter__(self):
-        """Context manager entry."""
-        return self
-    
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        """Context manager exit."""
-        self.shutdown()
+                driver.quit()
+            except:
+                pass
 
 
-def test_worker_function(n: int) -> int:
-    import time
-    time.sleep(0.1)  # Simular trabajo
-    return sum(i * i for i in range(n))
+def _generate_screenshot_fallback(url: str, width: int, height: int) -> str:
+    """
+    Fallback: genera un screenshot "dummy" cuando Selenium no está disponible.
+    """
+    from PIL import Image, ImageDraw, ImageFont
+    import io
+    
+    # Crear imagen simple con el URL
+    img = Image.new('RGB', (width, height), color='white')
+    draw = ImageDraw.Draw(img)
+    
+    # Dibujar texto
+    text_lines = [
+        "Screenshot Placeholder",
+        "",
+        f"URL: {url}",
+        "",
+        "Install Selenium + ChromeDriver",
+        "for real screenshots"
+    ]
+    
+    y_offset = 50
+    for line in text_lines:
+        draw.text((50, y_offset), line, fill='black')
+        y_offset += 30
+    
+    # Convertir a base64
+    buffer = io.BytesIO()
+    img.save(buffer, format='PNG')
+    screenshot_b64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
+    
+    logger.info(f"Screenshot fallback generado para {url}")
+    return screenshot_b64
