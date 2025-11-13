@@ -1,11 +1,4 @@
 #!/usr/bin/env python3
-"""
-Servidor de Procesamiento - Parte B
-Usa socketserver y multiprocessing para tareas CPU-bound.
-
-Soporta IPv4 e IPv6 (dual-stack).
-Usa ProcessPoolExecutor para procesamiento paralelo.
-"""
 import sys
 import os
 import argparse
@@ -29,13 +22,8 @@ logger = logging.getLogger(__name__)
 
 
 class ProcessingRequestHandler(socketserver.BaseRequestHandler):
-    """
-    Handler para requests de procesamiento.
-    Cada request se maneja en un thread separado (ThreadingTCPServer).
-    """
     
     def handle(self):
-        """Maneja una conexión de cliente."""
         client_addr = self.client_address
         logger.info(f"📨 Cliente conectado: {client_addr}")
         
@@ -46,7 +34,7 @@ class ProcessingRequestHandler(socketserver.BaseRequestHandler):
             msg_type = message.get('type', 'unknown')
             url = message.get('url', '')
             
-            logger.info(f"📩 Tarea recibida: {msg_type} para {url}")
+            logger.info(f"Tarea recibida: {msg_type} para {url}")
             
             # Procesar según tipo de mensaje
             if msg_type == MessageType.PING:
@@ -55,7 +43,7 @@ class ProcessingRequestHandler(socketserver.BaseRequestHandler):
                 
             elif msg_type == MessageType.SHUTDOWN:
                 # Comando de shutdown
-                logger.warning(f"⚠️  Comando SHUTDOWN recibido de {client_addr}")
+                logger.warning(f"  Comando SHUTDOWN recibido de {client_addr}")
                 response = create_response(True, result={"message": "Shutting down"})
                 Protocol.send_message_sync(self.request, response)
                 
@@ -74,13 +62,13 @@ class ProcessingRequestHandler(socketserver.BaseRequestHandler):
             
             # Enviar respuesta
             Protocol.send_message_sync(self.request, response)
-            logger.info(f"✅ Respuesta enviada a {client_addr}")
+            logger.info(f"Respuesta enviada a {client_addr}")
             
         except ConnectionError as e:
-            logger.error(f"❌ Error de conexión con {client_addr}: {e}")
+            logger.error(f" Error de conexión con {client_addr}: {e}")
         
         except Exception as e:
-            logger.error(f"❌ Error procesando request de {client_addr}: {e}", exc_info=True)
+            logger.error(f"Error procesando request de {client_addr}: {e}", exc_info=True)
             
             # Intentar enviar respuesta de error
             try:
@@ -90,27 +78,14 @@ class ProcessingRequestHandler(socketserver.BaseRequestHandler):
                 pass
         
         finally:
-            logger.info(f"👋 Conexión cerrada: {client_addr}")
+            logger.info(f"Conexión cerrada: {client_addr}")
 
 
 class DualStackTCPServer(socketserver.ThreadingTCPServer):
-    """
-    Servidor TCP que soporta IPv4 e IPv6 (dual-stack).
-    Usa ThreadingMixIn para manejar múltiples clientes concurrentemente.
-    """
-    
     # Permitir reutilizar dirección inmediatamente
     allow_reuse_address = True
     
     def __init__(self, server_address, RequestHandlerClass, num_processes=None):
-        """
-        Inicializa el servidor.
-        
-        Args:
-            server_address: Tupla (host, port)
-            RequestHandlerClass: Clase handler para requests
-            num_processes: Número de procesos en el pool
-        """
         # Inicializar worker_pool como None primero (para evitar AttributeError en server_close)
         self.worker_pool = None
         
@@ -130,25 +105,23 @@ class DualStackTCPServer(socketserver.ThreadingTCPServer):
         if is_ipv6:
             try:
                 self.socket.setsockopt(socket.IPPROTO_IPV6, socket.IPV6_V6ONLY, 0)
-                logger.info("✅ Dual-stack habilitado (IPv4 + IPv6)")
+                logger.info("Dual-stack habilitado (IPv4 + IPv6)")
             except (AttributeError, OSError) as e:
-                logger.warning(f"⚠️  No se pudo habilitar dual-stack: {e}")
+                logger.warning(f" No se pudo habilitar dual-stack: {e}")
         
         # Crear worker pool
         self.worker_pool = WorkerPool(num_processes)
-        logger.info(f"✅ Worker pool creado con {self.worker_pool.num_processes} procesos")
+        logger.info(f"Worker pool creado con {self.worker_pool.num_processes} procesos")
     
     def server_close(self):
-        """Cierra el servidor y limpia recursos."""
-        logger.info("🛑 Cerrando servidor...")
+        logger.info("Cerrando servidor...")
         if self.worker_pool is not None:
             self.worker_pool.shutdown()
         super().server_close()
-        logger.info("✅ Servidor cerrado")
+        logger.info("Servidor cerrado")
 
 
 def parse_args():
-    """Parsea argumentos de línea de comandos."""
     parser = argparse.ArgumentParser(
         description='Servidor de Procesamiento Distribuido',
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -190,11 +163,10 @@ Ejemplos:
 
 
 def setup_signal_handlers(server):
-    """Configura manejadores de señales para shutdown graceful."""
     import sys
     
     def signal_handler(signum, frame):
-        print(f"\n⚠️  Señal {signum} recibida. Cerrando servidor...")
+        print(f"\n Señal {signum} recibida. Cerrando servidor...")
         logger.info(f"Señal {signum} recibida. Iniciando shutdown...")
         try:
             server.shutdown()
@@ -207,7 +179,6 @@ def setup_signal_handlers(server):
 
 
 def main():
-    """Función principal."""
     args = parse_args()
     
     # Configurar nivel de logging
@@ -216,11 +187,11 @@ def main():
     
     # Imprimir banner
     print("=" * 70)
-    print("🔧 SERVIDOR DE PROCESAMIENTO - TP2")
+    print("ERVIDOR DE PROCESAMIENTO - TP2")
     print("=" * 70)
-    print(f"📍 Dirección: {args.ip}:{args.port}")
-    print(f"⚙️  Procesos: {args.processes or 'CPU count'}")
-    print(f"🔌 Protocolo: TCP (IPv4/IPv6)")
+    print(f"Dirección: {args.ip}:{args.port}")
+    print(f"Procesos: {args.processes or 'CPU count'}")
+    print(f"Protocolo: TCP (IPv4/IPv6)")
     print("=" * 70)
     print()
     
@@ -237,7 +208,7 @@ def main():
         
         # Obtener información real del socket
         actual_addr = server.socket.getsockname()
-        logger.info(f"✅ Servidor escuchando en: {actual_addr}")
+        logger.info(f"Servidor escuchando en: {actual_addr}")
         logger.info("Presiona Ctrl+C para detener\n")
         
         # Servir forever
@@ -245,26 +216,26 @@ def main():
         
     except OSError as e:
         if e.errno == 98:  # Address already in use
-            logger.error(f"❌ Error: Puerto {args.port} ya está en uso")
+            logger.error(f"Error: Puerto {args.port} ya está en uso")
             logger.error("   Usa 'lsof -ti:PORT | xargs kill -9' para liberar el puerto")
         elif e.errno == 99:  # Cannot assign requested address
-            logger.error(f"❌ Error: No se puede asignar la dirección {args.ip}")
+            logger.error(f"Error: No se puede asignar la dirección {args.ip}")
             logger.error("   Verifica que la dirección sea válida en tu sistema")
         else:
-            logger.error(f"❌ Error de socket: {e}")
+            logger.error(f" Error de socket: {e}")
         return 1
     
     except KeyboardInterrupt:
-        logger.info("\n⚠️  Interrumpido por el usuario")
+        logger.info("\nInterrumpido por el usuario")
     
     except Exception as e:
-        logger.error(f"❌ Error inesperado: {e}", exc_info=True)
+        logger.error(f" Error inesperado: {e}", exc_info=True)
         return 1
     
     finally:
         if 'server' in locals():
             server.server_close()
-        logger.info("👋 Servidor detenido")
+        logger.info("Servidor detenido")
     
     return 0
 

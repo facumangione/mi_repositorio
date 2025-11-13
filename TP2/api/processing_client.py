@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 
 
 class ProcessingClient:
-    
+
     def __init__(self, host: str, port: int, timeout: int = 30):
         self.host = host
         self.port = port
@@ -17,7 +17,6 @@ class ProcessingClient:
     async def request_processing(self, url: str, scraping_data: Dict) -> Dict[str, Any]:
         logger.info(f"Requesting processing for {url}")
         
-        # Crear tareas paralelas
         tasks = {
             'screenshot': self._request_screenshot(url),
             'performance': self._request_performance(url),
@@ -81,13 +80,13 @@ class ProcessingClient:
                     timeout=self.timeout
                 )
                 
-                logger.debug(f"Received {task_type} response")
+                logger.debug(f"Received {task_type} response: {response}")
                 
                 # Procesar respuesta
                 if response.get('success'):
                     return {
                         'success': True,
-                        'data': response.get('result', {})
+                        'result': response.get('result', {})
                     }
                 else:
                     return {
@@ -124,25 +123,31 @@ class ProcessingClient:
         consolidated = {}
         
         # Screenshot
-        if results.get('screenshot', {}).get('success'):
-            consolidated['screenshot'] = results['screenshot']['data']
+        screenshot_result = results.get('screenshot', {})
+        if screenshot_result.get('success'):
+            consolidated['screenshot'] = screenshot_result.get('result')
         else:
             consolidated['screenshot'] = None
-            consolidated['screenshot_error'] = results.get('screenshot', {}).get('error')
+            if screenshot_result.get('error'):
+                consolidated['screenshot_error'] = screenshot_result.get('error')
         
         # Performance
-        if results.get('performance', {}).get('success'):
-            consolidated['performance'] = results['performance']['data']
+        performance_result = results.get('performance', {})
+        if performance_result.get('success'):
+            consolidated['performance'] = performance_result.get('result')
         else:
             consolidated['performance'] = None
-            consolidated['performance_error'] = results.get('performance', {}).get('error')
+            if performance_result.get('error'):
+                consolidated['performance_error'] = performance_result.get('error')
         
         # Images
-        if results.get('images', {}).get('success'):
-            consolidated['thumbnails'] = results['images']['data']
+        images_result = results.get('images', {})
+        if images_result.get('success'):
+            consolidated['thumbnails'] = images_result.get('result', [])
         else:
             consolidated['thumbnails'] = []
-            consolidated['images_error'] = results.get('images', {}).get('error')
+            if images_result.get('error'):
+                consolidated['images_error'] = images_result.get('error')
         
         return consolidated
     
@@ -173,6 +178,3 @@ class ProcessingClient:
         except Exception as e:
             logger.warning(f"Processing server ping failed: {e}")
             return False
-        
-        
-    
