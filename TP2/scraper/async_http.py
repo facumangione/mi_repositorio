@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 
 
 class AsyncHTTPClient:
-    def __init__(self, timeout: int = 30, max_redirects: int = 10):
+    def __init__(self, timeout: int = 45, max_redirects: int = 10):
         self.timeout = aiohttp.ClientTimeout(total=timeout)
         self.max_redirects = max_redirects
         self.session: Optional[aiohttp.ClientSession] = None
@@ -129,7 +129,7 @@ class AsyncHTTPClient:
             return False
 
 
-async def fetch_url(url: str, timeout: int = 30) -> Tuple[str, int]:
+async def fetch_url(url: str, timeout: int = 45) -> Tuple[str, int]:
     async with AsyncHTTPClient(timeout=timeout) as client:
         html, status, _ = await client.fetch(url)
         return html, status

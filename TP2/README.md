@@ -57,7 +57,7 @@ TP2/
 - [ ] Fase 6: Bonus Track
 
 ## Autor
-[Tu Nombre]
+[Mangione Facundo]
 
 ## Fecha de Entrega
 14/11/2025

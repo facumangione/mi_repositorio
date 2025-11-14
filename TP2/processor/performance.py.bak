@@ -1,0 +1,73 @@
+import time
+import logging
+from typing import Dict, Any
+
+logger = logging.getLogger(__name__)
+
+
+def analyze_performance(url: str, options: Dict[str, Any] = None) -> Dict[str, Any]:
+    """Analiza rendimiento de URL con timeout corto."""
+    import requests
+    from bs4 import BeautifulSoup
+    
+    options = options or {}
+    timeout = min(options.get('timeout', 10), 10)  # Máximo 10s
+    
+    logger.info(f"Analizando rendimiento de {url} (timeout: {timeout}s)")
+    
+    try:
+        start_time = time.time()
+        
+        response = requests.get(
+            url,
+            timeout=timeout,
+            allow_redirects=True,
+            headers={'User-Agent': 'Mozilla/5.0'}
+        )
+        
+        load_time = (time.time() - start_time) * 1000
+        
+        status_code = response.status_code
+        page_size = len(response.content)
+        redirect_count = len(response.history)
+        
+        # Parsear HTML rápido
+        soup = BeautifulSoup(response.content, 'lxml')
+        
+        scripts = soup.find_all('script', src=True)
+        styles = soup.find_all('link', rel='stylesheet')
+        images = soup.find_all('img', src=True)
+        
+        num_requests = 1 + len(scripts) + len(styles) + len(images)
+        total_size = page_size
+        
+        result = {
+            "load_time_ms": round(load_time, 2),
+            "total_size_kb": round(total_size / 1024, 2),
+            "page_size_kb": round(page_size / 1024, 2),
+            "num_requests": num_requests,
+            "status_code": status_code,
+            "redirect_count": redirect_count,
+            "resources": {
+                "scripts": len(scripts),
+                "stylesheets": len(styles),
+                "images": len(images)
+            },
+            "content_type": response.headers.get('Content-Type', 'unknown'),
+            "server": response.headers.get('Server', 'unknown')
+        }
+        
+        logger.info(f"Análisis completado: {load_time:.2f}ms")
+        return result
+        
+    except requests.Timeout:
+        logger.error(f"Timeout analizando {url}")
+        raise TimeoutError(f"Request timeout after {timeout} seconds")
+    
+    except requests.RequestException as e:
+        logger.error(f"Error de request: {e}")
+        raise ConnectionError(f"Failed to fetch URL: {str(e)}")
+    
+    except Exception as e:
+        logger.error(f"Error analizando rendimiento: {e}")
+        raise
