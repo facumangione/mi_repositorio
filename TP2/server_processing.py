@@ -26,26 +26,21 @@ def handle_client_connection(client_socket_fd, client_addr, worker_pool_size):
     """
     Esta función se ejecuta en un PROCESO SEPARADO.
     Recibe el file descriptor del socket y recrea el socket en el proceso hijo.
+    
+    FIX: Agregamos mejor manejo de errores y logging.
     """
     client_socket = None
-    
     try:
         # Recrear socket desde el file descriptor
         client_socket = socket.fromfd(client_socket_fd, socket.AF_INET, socket.SOCK_STREAM)
         
         logger.info(f"🔧 Proceso {os.getpid()} manejando cliente {client_addr}")
         
+        # FIX: Agregar timeout al socket para evitar cuelgues
+        client_socket.settimeout(30)
+        
         # Recibir mensaje
-        try:
-            message = Protocol.receive_message_sync(client_socket)
-        except Exception as e:
-            logger.error(f"Error recibiendo mensaje: {e}")
-            error_response = create_response(False, error=f"Protocol error: {str(e)}")
-            try:
-                Protocol.send_message_sync(client_socket, error_response)
-            except:
-                pass
-            return "ERROR"
+        message = Protocol.receive_message_sync(client_socket)
         
         msg_type = message.get('type', 'unknown')
         url = message.get('url', '')
@@ -68,50 +63,52 @@ def handle_client_connection(client_socket_fd, client_addr, worker_pool_size):
             
         else:
             # Crear un worker pool temporal para esta tarea
-            try:
-                with WorkerPool(worker_pool_size) as pool:
-                    result = pool.process_task(message)
-                    
-                    if result.get('success'):
-                        result_data = result.get('result')
-                        # Añadir info del proceso
-                        if isinstance(result_data, dict):
-                            result_data['handled_by_process'] = os.getpid()
-                        response = create_response(True, result=result_data)
-                    else:
-                        error_msg = result.get('error', 'Processing failed')
-                        logger.error(f"Processing failed: {error_msg}")
-                        response = create_response(False, error=error_msg)
-            except Exception as e:
-                logger.error(f"Error en worker pool: {e}", exc_info=True)
-                response = create_response(False, error=f"Worker pool error: {str(e)}")
+            with WorkerPool(worker_pool_size) as pool:
+                result = pool.process_task(message)
+                
+                if result.get('success'):
+                    result_data = result.get('result')
+                    # Añadir info del proceso
+                    if isinstance(result_data, dict):
+                        result_data['handled_by_process'] = os.getpid()
+                    response = create_response(True, result=result_data)
+                else:
+                    response = create_response(False, error=result.get('error'))
         
         # Enviar respuesta
-        try:
-            Protocol.send_message_sync(client_socket, response)
-            logger.info(f"✅ Proceso {os.getpid()}: Respuesta enviada a {client_addr}")
-        except Exception as e:
-            logger.error(f"Error enviando respuesta: {e}")
-            return "ERROR"
+        Protocol.send_message_sync(client_socket, response)
+        logger.info(f"✅ Proceso {os.getpid()}: Respuesta enviada a {client_addr}")
         
         return "OK"
         
-    except Exception as e:
-        logger.error(f"❌ Proceso {os.getpid()}: Error fatal: {e}", exc_info=True)
+    except socket.timeout:
+        logger.error(f"⏱️ Proceso {os.getpid()}: Timeout manejando cliente")
         try:
+            error_response = create_response(False, error="Request timeout")
             if client_socket:
-                error_response = create_response(False, error=str(e))
+                Protocol.send_message_sync(client_socket, error_response)
+        except:
+            pass
+        return "TIMEOUT"
+        
+    except Exception as e:
+        logger.error(f"❌ Proceso {os.getpid()}: Error: {e}", exc_info=True)
+        try:
+            error_response = create_response(False, error=str(e))
+            if client_socket:
                 Protocol.send_message_sync(client_socket, error_response)
         except:
             pass
         return "ERROR"
-    
+        
     finally:
         if client_socket:
             try:
+                # FIX: Asegurar que se cierra el socket correctamente
+                client_socket.shutdown(socket.SHUT_RDWR)
                 client_socket.close()
-            except Exception as e:
-                logger.debug(f"Error cerrando socket: {e}")
+            except:
+                pass
         logger.info(f"🔌 Proceso {os.getpid()}: Conexión cerrada con {client_addr}")
 
 
@@ -153,34 +150,29 @@ class MultiprocessingServer:
             print(f"⏹️  Presiona Ctrl+C para detener\n")
             
             # Loop principal - acepta conexiones
-            connection_count = 0
             while self.running:
                 try:
                     # Aceptar conexión
                     client_socket, client_addr = self.socket.accept()
-                    connection_count += 1
-                    logger.info(f"📨 Nueva conexión #{connection_count} de: {client_addr}")
+                    logger.info(f"📨 Nueva conexión de: {client_addr}")
                     
                     # Obtener file descriptor ANTES de cerrar el socket en el proceso padre
                     client_fd = client_socket.fileno()
                     
+                    # FIX: Duplicar el FD para que el proceso hijo tenga una copia independiente
+                    client_fd_dup = os.dup(client_fd)
+                    
                     # Enviar al pool de procesos
-                    # IMPORTANTE: Pasar el FD, no el socket directamente
                     future = self.executor.submit(
                         handle_client_connection,
-                        client_fd,
+                        client_fd_dup,  # Usar el FD duplicado
                         client_addr,
                         max(1, self.num_workers // 2)  # Workers para tareas internas
                     )
                     
                     # Cerrar el socket en el proceso padre
-                    # (el proceso hijo lo recreará desde el FD)
+                    # El proceso hijo tiene su propia copia
                     client_socket.close()
-                    
-                    # Opcional: agregar callback para logging
-                    future.add_done_callback(
-                        lambda f: self._log_future_result(f, connection_count)
-                    )
                     
                 except socket.timeout:
                     # Timeout normal, continuar
@@ -197,20 +189,6 @@ class MultiprocessingServer:
         finally:
             self.shutdown()
     
-    def _log_future_result(self, future, conn_num):
-        """Callback para logging de resultados"""
-        try:
-            result = future.result(timeout=0.1)
-            if result == "SHUTDOWN":
-                logger.info("⚠️ Señal de shutdown recibida desde worker")
-                self.running = False
-            elif result == "OK":
-                logger.debug(f"✅ Conexión #{conn_num} completada exitosamente")
-            elif result == "ERROR":
-                logger.warning(f"⚠️ Conexión #{conn_num} completada con errores")
-        except Exception as e:
-            logger.debug(f"Error obteniendo resultado de future: {e}")
-    
     def shutdown(self):
         """Cierra el servidor y el pool de workers"""
         logger.info("🛑 Cerrando servidor...")
@@ -219,15 +197,12 @@ class MultiprocessingServer:
         if self.socket:
             try:
                 self.socket.close()
-            except Exception as e:
-                logger.debug(f"Error cerrando socket principal: {e}")
+            except:
+                pass
         
         if self.executor:
             logger.info("Cerrando pool de procesos...")
-            try:
-                self.executor.shutdown(wait=True, cancel_futures=False)
-            except Exception as e:
-                logger.error(f"Error cerrando executor: {e}")
+            self.executor.shutdown(wait=True, cancel_futures=False)
         
         logger.info("✅ Servidor cerrado")
 
