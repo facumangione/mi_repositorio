@@ -1,0 +1,423 @@
+2025-11-14 10:04:57,308 - api.processing_client - INFO - Processing client configured: localhost:8001
+2025-11-14 10:04:57,309 - __main__ - INFO -  Servidor de scraping iniciando...
+2025-11-14 10:04:57,309 - __main__ - INFO -  Escuchando en: localhost:8000
+2025-11-14 10:04:57,309 - __main__ - INFO -  Servidor de procesamiento: localhost:8001
+2025-11-14 10:04:57,309 - __main__ - INFO -   Workers: 4
+2025-11-14 10:05:00,020 - api.processing_client - WARNING - Processing server ping failed: [Errno 104] Connection reset by peer
+2025-11-14 10:05:00,021 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:00 -0300] "GET /health HTTP/1.1" 503 342 "-" "curl/8.5.0"
+2025-11-14 10:05:02,045 - api.processing_client - WARNING - Processing server ping failed: 0 bytes read on a total of 4 expected bytes
+2025-11-14 10:05:02,053 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:02 -0300] "GET /health HTTP/1.1" 503 342 "-" "curl/8.5.0"
+2025-11-14 10:05:02,092 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:05:02,092 - api.handlers - INFO - Starting scraping: http://example.com
+2025-11-14 10:05:02,092 - scraper.async_http - INFO - Fetching: http://example.com
+2025-11-14 10:05:02,588 - scraper.async_http - INFO - Fetched http://example.com: 200, 513 bytes
+2025-11-14 10:05:02,839 - api.handlers - INFO - Fetched http://example.com: 200, 513 bytes
+2025-11-14 10:05:02,841 - scraper.html_parser - INFO - Parsing HTML from http://example.com
+2025-11-14 10:05:02,842 - api.handlers - INFO - Parsed HTML: Example Domain
+2025-11-14 10:05:02,842 - api.handlers - INFO - Requesting processing from Server B: http://example.com
+2025-11-14 10:05:02,842 - api.processing_client - INFO - Requesting processing for http://example.com
+2025-11-14 10:05:02,843 - api.processing_client - ERROR - Conexión cerrada por el servidor durante screenshot_request
+2025-11-14 10:05:02,844 - api.processing_client - ERROR - Conexión cerrada por el servidor durante performance_request
+2025-11-14 10:05:02,845 - api.processing_client - WARNING - Performance failed: Connection reset by server
+2025-11-14 10:05:02,845 - api.handlers - INFO - Processing completed for http://example.com
+2025-11-14 10:05:02,845 - api.handlers - INFO - Complete response ready for http://example.com
+2025-11-14 10:05:02,845 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:02 -0300] "GET /scrape?url=http://example.com HTTP/1.1" 200 1963 "-" "curl/8.5.0"
+2025-11-14 10:05:09,214 - api.processing_client - WARNING - Processing server ping failed: [Errno 104] Connection reset by peer
+2025-11-14 10:05:09,215 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:09 -0300] "GET /health HTTP/1.1" 503 342 "-" "curl/8.5.0"
+2025-11-14 10:05:09,503 - api.processing_client - WARNING - Processing server ping failed: [Errno 104] Connection reset by peer
+2025-11-14 10:05:09,503 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:09 -0300] "GET /health HTTP/1.1" 503 342 "-" "python-requests/2.32.5"
+2025-11-14 10:05:10,008 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:10 -0300] "GET /info HTTP/1.1" 200 1219 "-" "python-requests/2.32.5"
+2025-11-14 10:05:10,512 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:05:10,513 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:05:10,513 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:10 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.32.5"
+2025-11-14 10:05:11,018 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:05:11,018 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:05:11,019 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:11 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.32.5"
+2025-11-14 10:05:11,524 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:05:11,525 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:05:11,525 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:11 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.32.5"
+2025-11-14 10:05:12,030 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:05:12,030 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:05:12,030 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:12 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.32.5"
+2025-11-14 10:05:12,535 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:12 -0300] "GET /scrape?url=not-a-valid-url HTTP/1.1" 400 241 "-" "python-requests/2.32.5"
+2025-11-14 10:05:13,040 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:13 -0300] "GET /scrape HTTP/1.1" 400 286 "-" "python-requests/2.32.5"
+2025-11-14 10:05:13,544 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:05:13,545 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:05:13,545 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:13 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.32.5"
+2025-11-14 10:05:14,049 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:05:14,049 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:05:14,050 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:14 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.32.5"
+2025-11-14 10:05:23,690 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:05:23,690 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:05:23,691 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:23 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.32.5"
+2025-11-14 10:05:23,694 - api.handlers - INFO - Scraping request received: http://example.org
+2025-11-14 10:05:23,695 - api.handlers - INFO - Starting scraping: http://example.org
+2025-11-14 10:05:23,695 - scraper.async_http - INFO - Fetching: http://example.org
+2025-11-14 10:05:24,183 - scraper.async_http - INFO - Fetched http://example.org: 200, 513 bytes
+2025-11-14 10:05:24,434 - api.handlers - INFO - Fetched http://example.org: 200, 513 bytes
+2025-11-14 10:05:24,435 - scraper.html_parser - INFO - Parsing HTML from http://example.org
+2025-11-14 10:05:24,437 - api.handlers - INFO - Parsed HTML: Example Domain
+2025-11-14 10:05:24,437 - api.handlers - INFO - Requesting processing from Server B: http://example.org
+2025-11-14 10:05:24,437 - api.processing_client - INFO - Requesting processing for http://example.org
+2025-11-14 10:05:24,440 - api.processing_client - ERROR - Error inesperado en screenshot_request: 0 bytes read on a total of 4 expected bytes
+Traceback (most recent call last):
+  File "/home/facundo/Escritorio/mi_repositorio/TP2/api/processing_client.py", line 110, in _send_task
+    response = await asyncio.wait_for(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/tasks.py", line 520, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "/home/facundo/Escritorio/mi_repositorio/TP2/common/protocol.py", line 57, in receive_message_async
+    header = await reader.readexactly(Protocol.HEADER_SIZE)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/streams.py", line 750, in readexactly
+    raise exceptions.IncompleteReadError(incomplete, n)
+asyncio.exceptions.IncompleteReadError: 0 bytes read on a total of 4 expected bytes
+2025-11-14 10:05:24,445 - api.processing_client - ERROR - Error inesperado en performance_request: 0 bytes read on a total of 4 expected bytes
+Traceback (most recent call last):
+  File "/home/facundo/Escritorio/mi_repositorio/TP2/api/processing_client.py", line 110, in _send_task
+    response = await asyncio.wait_for(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/tasks.py", line 520, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "/home/facundo/Escritorio/mi_repositorio/TP2/common/protocol.py", line 57, in receive_message_async
+    header = await reader.readexactly(Protocol.HEADER_SIZE)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/streams.py", line 750, in readexactly
+    raise exceptions.IncompleteReadError(incomplete, n)
+asyncio.exceptions.IncompleteReadError: 0 bytes read on a total of 4 expected bytes
+2025-11-14 10:05:24,446 - api.processing_client - WARNING - Performance failed: 0 bytes read on a total of 4 expected bytes
+2025-11-14 10:05:24,447 - api.handlers - INFO - Processing completed for http://example.org
+2025-11-14 10:05:24,447 - api.handlers - INFO - Complete response ready for http://example.org
+2025-11-14 10:05:24,447 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:23 -0300] "GET /scrape?url=http%3A%2F%2Fexample.org HTTP/1.1" 200 1997 "-" "python-requests/2.32.5"
+2025-11-14 10:05:24,451 - api.handlers - INFO - Scraping request received: http://example.net
+2025-11-14 10:05:24,452 - api.handlers - INFO - Starting scraping: http://example.net
+2025-11-14 10:05:24,452 - scraper.async_http - INFO - Fetching: http://example.net
+2025-11-14 10:05:25,239 - scraper.async_http - INFO - Fetched http://example.net: 200, 513 bytes
+2025-11-14 10:05:25,491 - api.handlers - INFO - Fetched http://example.net: 200, 513 bytes
+2025-11-14 10:05:25,492 - scraper.html_parser - INFO - Parsing HTML from http://example.net
+2025-11-14 10:05:25,493 - api.handlers - INFO - Parsed HTML: Example Domain
+2025-11-14 10:05:25,494 - api.handlers - INFO - Requesting processing from Server B: http://example.net
+2025-11-14 10:05:25,494 - api.processing_client - INFO - Requesting processing for http://example.net
+2025-11-14 10:05:25,496 - api.processing_client - ERROR - Conexión cerrada por el servidor durante screenshot_request
+2025-11-14 10:05:25,497 - api.processing_client - ERROR - Error inesperado en performance_request: 0 bytes read on a total of 4 expected bytes
+Traceback (most recent call last):
+  File "/home/facundo/Escritorio/mi_repositorio/TP2/api/processing_client.py", line 110, in _send_task
+    response = await asyncio.wait_for(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/tasks.py", line 520, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "/home/facundo/Escritorio/mi_repositorio/TP2/common/protocol.py", line 57, in receive_message_async
+    header = await reader.readexactly(Protocol.HEADER_SIZE)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/streams.py", line 750, in readexactly
+    raise exceptions.IncompleteReadError(incomplete, n)
+asyncio.exceptions.IncompleteReadError: 0 bytes read on a total of 4 expected bytes
+2025-11-14 10:05:25,498 - api.processing_client - WARNING - Performance failed: 0 bytes read on a total of 4 expected bytes
+2025-11-14 10:05:25,498 - api.handlers - INFO - Processing completed for http://example.net
+2025-11-14 10:05:25,498 - api.handlers - INFO - Complete response ready for http://example.net
+2025-11-14 10:05:25,499 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:24 -0300] "GET /scrape?url=http%3A%2F%2Fexample.net HTTP/1.1" 200 1980 "-" "python-requests/2.32.5"
+2025-11-14 10:05:27,504 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:05:27,504 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:05:27,505 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:27 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.32.5"
+2025-11-14 10:05:27,505 - api.handlers - INFO - Scraping request received: http://example.org
+2025-11-14 10:05:27,505 - api.handlers - INFO - Cache HIT for http://example.org
+2025-11-14 10:05:27,505 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:27 -0300] "GET /scrape?url=http%3A%2F%2Fexample.org HTTP/1.1" 200 1996 "-" "python-requests/2.32.5"
+2025-11-14 10:05:27,511 - api.handlers - INFO - Scraping request received: http://example.org
+2025-11-14 10:05:27,511 - api.handlers - INFO - Cache HIT for http://example.org
+2025-11-14 10:05:27,512 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:27 -0300] "GET /scrape?url=http%3A%2F%2Fexample.org HTTP/1.1" 200 1996 "-" "python-requests/2.32.5"
+2025-11-14 10:05:27,512 - api.handlers - INFO - Scraping request received: http://example.net
+2025-11-14 10:05:27,512 - api.handlers - INFO - Cache HIT for http://example.net
+2025-11-14 10:05:27,512 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:27 -0300] "GET /scrape?url=http%3A%2F%2Fexample.net HTTP/1.1" 200 1979 "-" "python-requests/2.32.5"
+2025-11-14 10:05:27,513 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:05:27,513 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:05:27,513 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:27 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.32.5"
+2025-11-14 10:05:29,527 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:05:29,527 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:05:29,527 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:29 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.32.5"
+2025-11-14 10:05:29,531 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:05:29,531 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:05:29,532 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:29 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.32.5"
+2025-11-14 10:05:29,532 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:05:29,532 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:05:29,533 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:29 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.32.5"
+2025-11-14 10:05:29,537 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:05:29,537 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:05:29,538 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:29 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.32.5"
+2025-11-14 10:05:29,540 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:05:29,541 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:05:29,541 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:29 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.32.5"
+2025-11-14 10:05:29,543 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:05:29,544 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:05:29,544 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:29 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.32.5"
+2025-11-14 10:05:29,549 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:05:29,550 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:05:29,550 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:29 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.32.5"
+2025-11-14 10:05:29,551 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:05:29,551 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:05:29,551 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:29 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.32.5"
+2025-11-14 10:05:29,552 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:05:29,552 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:05:29,556 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:29 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.32.5"
+2025-11-14 10:05:29,558 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:05:29,558 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:05:29,559 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:29 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.32.5"
+2025-11-14 10:05:31,571 - api.handlers - INFO - Scraping request received: http://example.net
+2025-11-14 10:05:31,571 - api.handlers - INFO - Cache HIT for http://example.net
+2025-11-14 10:05:31,571 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:31 -0300] "GET /scrape?url=http%3A%2F%2Fexample.net HTTP/1.1" 200 1979 "-" "python-requests/2.32.5"
+2025-11-14 10:05:31,573 - api.handlers - INFO - Scraping request received: http://example.org
+2025-11-14 10:05:31,573 - api.handlers - INFO - Cache HIT for http://example.org
+2025-11-14 10:05:31,573 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:31 -0300] "GET /scrape?url=http%3A%2F%2Fexample.org HTTP/1.1" 200 1996 "-" "python-requests/2.32.5"
+2025-11-14 10:05:31,575 - api.handlers - INFO - Scraping request received: https://www.ietf.org/
+2025-11-14 10:05:31,576 - api.handlers - INFO - Starting scraping: https://www.ietf.org/
+2025-11-14 10:05:31,576 - scraper.async_http - INFO - Fetching: https://www.ietf.org/
+2025-11-14 10:05:31,577 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:05:31,577 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:05:31,579 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:31 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.32.5"
+2025-11-14 10:05:31,579 - api.handlers - INFO - Scraping request received: https://httpbin.org/html
+2025-11-14 10:05:31,579 - api.handlers - INFO - Starting scraping: https://httpbin.org/html
+2025-11-14 10:05:31,580 - scraper.async_http - INFO - Fetching: https://httpbin.org/html
+2025-11-14 10:05:31,749 - scraper.async_http - INFO - Fetched https://www.ietf.org/: 200, 84323 bytes
+2025-11-14 10:05:32,001 - api.handlers - INFO - Fetched https://www.ietf.org/: 200, 84323 bytes
+2025-11-14 10:05:32,029 - scraper.html_parser - INFO - Parsing HTML from https://www.ietf.org/
+2025-11-14 10:05:32,042 - api.handlers - INFO - Parsed HTML: IETF  | Internet Engineering Task Force
+2025-11-14 10:05:32,044 - api.handlers - INFO - Requesting processing from Server B: https://www.ietf.org/
+2025-11-14 10:05:32,044 - api.processing_client - INFO - Requesting processing for https://www.ietf.org/
+2025-11-14 10:05:32,049 - api.processing_client - ERROR - Conexión cerrada por el servidor durante screenshot_request
+2025-11-14 10:05:32,051 - api.processing_client - ERROR - Conexión cerrada por el servidor durante performance_request
+2025-11-14 10:05:32,053 - api.processing_client - ERROR - Conexión cerrada por el servidor durante images_request
+2025-11-14 10:05:32,053 - api.processing_client - WARNING - Performance failed: Connection reset by server
+2025-11-14 10:05:32,053 - api.handlers - INFO - Processing completed for https://www.ietf.org/
+2025-11-14 10:05:32,053 - api.handlers - INFO - Complete response ready for https://www.ietf.org/
+2025-11-14 10:05:32,054 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:31 -0300] "GET /scrape?url=https%3A%2F%2Fwww.ietf.org%2F HTTP/1.1" 200 4742 "-" "python-requests/2.32.5"
+2025-11-14 10:05:32,487 - scraper.async_http - INFO - Fetched https://httpbin.org/html: 503, 564 bytes
+2025-11-14 10:05:32,739 - api.handlers - INFO - Fetched https://httpbin.org/html: 503, 564 bytes
+2025-11-14 10:05:32,741 - scraper.html_parser - INFO - Parsing HTML from https://httpbin.org/html
+2025-11-14 10:05:32,743 - api.handlers - INFO - Parsed HTML: 503 Service Temporarily Unavailable
+2025-11-14 10:05:32,743 - api.handlers - INFO - Requesting processing from Server B: https://httpbin.org/html
+2025-11-14 10:05:32,743 - api.processing_client - INFO - Requesting processing for https://httpbin.org/html
+2025-11-14 10:05:32,745 - api.processing_client - ERROR - Conexión cerrada por el servidor durante screenshot_request
+2025-11-14 10:05:32,747 - api.processing_client - ERROR - Error inesperado en performance_request: 0 bytes read on a total of 4 expected bytes
+Traceback (most recent call last):
+  File "/home/facundo/Escritorio/mi_repositorio/TP2/api/processing_client.py", line 110, in _send_task
+    response = await asyncio.wait_for(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/tasks.py", line 520, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "/home/facundo/Escritorio/mi_repositorio/TP2/common/protocol.py", line 57, in receive_message_async
+    header = await reader.readexactly(Protocol.HEADER_SIZE)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/streams.py", line 750, in readexactly
+    raise exceptions.IncompleteReadError(incomplete, n)
+asyncio.exceptions.IncompleteReadError: 0 bytes read on a total of 4 expected bytes
+2025-11-14 10:05:32,748 - api.processing_client - WARNING - Performance failed: 0 bytes read on a total of 4 expected bytes
+2025-11-14 10:05:32,748 - api.handlers - INFO - Processing completed for https://httpbin.org/html
+2025-11-14 10:05:32,748 - api.handlers - INFO - Complete response ready for https://httpbin.org/html
+2025-11-14 10:05:32,748 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:31 -0300] "GET /scrape?url=https%3A%2F%2Fhttpbin.org%2Fhtml HTTP/1.1" 200 1954 "-" "python-requests/2.32.5"
+2025-11-14 10:05:37,991 - api.processing_client - WARNING - Processing server ping failed: [Errno 104] Connection reset by peer
+2025-11-14 10:05:37,991 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:37 -0300] "GET /health HTTP/1.1" 503 342 "-" "python-requests/2.32.5"
+2025-11-14 10:05:37,996 - api.processing_client - WARNING - Processing server ping failed: [Errno 104] Connection reset by peer
+2025-11-14 10:05:37,997 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:37 -0300] "GET /health HTTP/1.1" 503 342 "-" "python-requests/2.32.5"
+2025-11-14 10:05:41,062 - api.handlers - INFO - Scraping request received: http://httpbin.org/delay/35
+2025-11-14 10:05:41,062 - api.handlers - INFO - Starting scraping: http://httpbin.org/delay/35
+2025-11-14 10:05:41,062 - scraper.async_http - INFO - Fetching: http://httpbin.org/delay/35
+2025-11-14 10:05:41,499 - scraper.async_http - INFO - Fetched http://httpbin.org/delay/35: 503, 564 bytes
+2025-11-14 10:05:41,750 - api.handlers - INFO - Fetched http://httpbin.org/delay/35: 503, 564 bytes
+2025-11-14 10:05:41,752 - scraper.html_parser - INFO - Parsing HTML from http://httpbin.org/delay/35
+2025-11-14 10:05:41,753 - api.handlers - INFO - Parsed HTML: 503 Service Temporarily Unavailable
+2025-11-14 10:05:41,753 - api.handlers - INFO - Requesting processing from Server B: http://httpbin.org/delay/35
+2025-11-14 10:05:41,753 - api.processing_client - INFO - Requesting processing for http://httpbin.org/delay/35
+2025-11-14 10:05:41,755 - api.processing_client - ERROR - Conexión cerrada por el servidor durante screenshot_request
+2025-11-14 10:05:41,756 - api.processing_client - ERROR - Error inesperado en performance_request: 0 bytes read on a total of 4 expected bytes
+Traceback (most recent call last):
+  File "/home/facundo/Escritorio/mi_repositorio/TP2/api/processing_client.py", line 110, in _send_task
+    response = await asyncio.wait_for(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/tasks.py", line 520, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "/home/facundo/Escritorio/mi_repositorio/TP2/common/protocol.py", line 57, in receive_message_async
+    header = await reader.readexactly(Protocol.HEADER_SIZE)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/streams.py", line 750, in readexactly
+    raise exceptions.IncompleteReadError(incomplete, n)
+asyncio.exceptions.IncompleteReadError: 0 bytes read on a total of 4 expected bytes
+2025-11-14 10:05:41,757 - api.processing_client - WARNING - Performance failed: 0 bytes read on a total of 4 expected bytes
+2025-11-14 10:05:41,757 - api.handlers - INFO - Processing completed for http://httpbin.org/delay/35
+2025-11-14 10:05:41,757 - api.handlers - INFO - Complete response ready for http://httpbin.org/delay/35
+2025-11-14 10:05:41,758 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:41 -0300] "GET /scrape?url=http%3A%2F%2Fhttpbin.org%2Fdelay%2F35 HTTP/1.1" 200 1964 "-" "python-requests/2.32.5"
+2025-11-14 10:05:46,831 - api.processing_client - WARNING - Processing server ping failed: [Errno 104] Connection reset by peer
+2025-11-14 10:05:46,831 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:46 -0300] "GET /health HTTP/1.1" 503 342 "-" "python-requests/2.32.5"
+2025-11-14 10:05:46,834 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:05:46,834 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:05:46,835 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:46 -0300] "GET /scrape?url=http://example.com HTTP/1.1" 200 1962 "-" "python-requests/2.32.5"
+2025-11-14 10:05:46,837 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:05:46,837 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:05:46,837 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:46 -0300] "GET /scrape?url=http://example.com HTTP/1.1" 200 1962 "-" "python-requests/2.32.5"
+2025-11-14 10:05:46,840 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:05:46,840 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:05:46,840 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:46 -0300] "GET /scrape?url=http://example.com HTTP/1.1" 200 1962 "-" "python-requests/2.32.5"
+2025-11-14 10:05:46,842 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:05:46,843 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:05:46,843 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:46 -0300] "GET /scrape?url=http://example.com HTTP/1.1" 200 1962 "-" "python-requests/2.32.5"
+2025-11-14 10:05:47,849 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:05:47,850 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:05:47,850 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:47 -0300] "GET /scrape?url=http://example.com HTTP/1.1" 200 1962 "-" "python-requests/2.32.5"
+2025-11-14 10:05:47,854 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:05:47,854 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:05:47,855 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:47 -0300] "GET /scrape?url=http://example.com HTTP/1.1" 200 1962 "-" "python-requests/2.32.5"
+2025-11-14 10:05:48,360 - api.processing_client - WARNING - Processing server ping failed: [Errno 104] Connection reset by peer
+2025-11-14 10:05:48,361 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:48 -0300] "GET /health HTTP/1.1" 503 342 "-" "python-requests/2.32.5"
+2025-11-14 10:05:48,366 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:48 -0300] "GET /scrape?url=invalid HTTP/1.1" 400 241 "-" "python-requests/2.32.5"
+2025-11-14 10:05:48,870 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:05:48,871 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:05:48,871 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:05:48 -0300] "GET /scrape?url=http://example.com HTTP/1.1" 200 1962 "-" "python-requests/2.32.5"
+2025-11-14 10:07:09,480 - api.processing_client - WARNING - Processing server ping failed: [Errno 104] Connection reset by peer
+2025-11-14 10:07:09,481 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:07:09 -0300] "GET /health HTTP/1.1" 503 342 "-" "curl/8.5.0"
+2025-11-14 10:07:09,499 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:07:09 -0300] "GET /info HTTP/1.1" 200 1295 "-" "curl/8.5.0"
+2025-11-14 10:07:09,520 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:07:09,520 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:07:09,521 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:07:09 -0300] "GET /scrape?url=http://example.com HTTP/1.1" 200 1962 "-" "curl/8.5.0"
+2025-11-14 10:07:09,677 - api.processing_client - WARNING - Processing server ping failed: [Errno 104] Connection reset by peer
+2025-11-14 10:07:09,678 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:07:09 -0300] "GET /health HTTP/1.1" 503 342 "-" "curl/8.5.0"
+2025-11-14 10:07:32,445 - api.processing_client - WARNING - Processing server ping failed: [Errno 104] Connection reset by peer
+2025-11-14 10:07:32,446 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:07:32 -0300] "GET /health HTTP/1.1" 503 342 "-" "curl/8.5.0"
+2025-11-14 10:07:32,742 - api.processing_client - WARNING - Processing server ping failed: [Errno 104] Connection reset by peer
+2025-11-14 10:07:32,742 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:07:32 -0300] "GET /health HTTP/1.1" 503 342 "-" "python-requests/2.31.0"
+2025-11-14 10:07:33,248 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:07:33 -0300] "GET /info HTTP/1.1" 200 1295 "-" "python-requests/2.31.0"
+2025-11-14 10:07:33,753 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:07:33,753 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:07:33,753 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:07:33 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.31.0"
+2025-11-14 10:07:34,259 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:07:34,259 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:07:34,259 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:07:34 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.31.0"
+2025-11-14 10:07:34,764 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:07:34,764 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:07:34,765 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:07:34 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.31.0"
+2025-11-14 10:07:35,270 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:07:35,270 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:07:35,270 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:07:35 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.31.0"
+2025-11-14 10:07:35,774 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:07:35 -0300] "GET /scrape?url=not-a-valid-url HTTP/1.1" 400 241 "-" "python-requests/2.31.0"
+2025-11-14 10:07:36,278 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:07:36 -0300] "GET /scrape HTTP/1.1" 400 286 "-" "python-requests/2.31.0"
+2025-11-14 10:07:36,783 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:07:36,783 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:07:36,784 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:07:36 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.31.0"
+2025-11-14 10:07:37,288 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:07:37,289 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:07:37,289 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:07:37 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.31.0"
+2025-11-14 10:08:06,519 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:08:06,520 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:08:06,520 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:08:06 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.31.0"
+2025-11-14 10:08:06,524 - api.handlers - INFO - Scraping request received: http://example.org
+2025-11-14 10:08:06,524 - api.handlers - INFO - Cache HIT for http://example.org
+2025-11-14 10:08:06,525 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:08:06 -0300] "GET /scrape?url=http%3A%2F%2Fexample.org HTTP/1.1" 200 1996 "-" "python-requests/2.31.0"
+2025-11-14 10:08:06,528 - api.handlers - INFO - Scraping request received: http://example.net
+2025-11-14 10:08:06,528 - api.handlers - INFO - Cache HIT for http://example.net
+2025-11-14 10:08:06,529 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:08:06 -0300] "GET /scrape?url=http%3A%2F%2Fexample.net HTTP/1.1" 200 1979 "-" "python-requests/2.31.0"
+2025-11-14 10:08:08,534 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:08:08,535 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:08:08,535 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:08:08 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.31.0"
+2025-11-14 10:08:08,539 - api.handlers - INFO - Scraping request received: http://example.org
+2025-11-14 10:08:08,540 - api.handlers - INFO - Cache HIT for http://example.org
+2025-11-14 10:08:08,540 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:08:08 -0300] "GET /scrape?url=http%3A%2F%2Fexample.org HTTP/1.1" 200 1996 "-" "python-requests/2.31.0"
+2025-11-14 10:08:08,546 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:08:08,546 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:08:08,547 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:08:08 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.31.0"
+2025-11-14 10:08:08,548 - api.handlers - INFO - Scraping request received: http://example.org
+2025-11-14 10:08:08,548 - api.handlers - INFO - Cache HIT for http://example.org
+2025-11-14 10:08:08,548 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:08:08 -0300] "GET /scrape?url=http%3A%2F%2Fexample.org HTTP/1.1" 200 1996 "-" "python-requests/2.31.0"
+2025-11-14 10:08:08,549 - api.handlers - INFO - Scraping request received: http://example.net
+2025-11-14 10:08:08,549 - api.handlers - INFO - Cache HIT for http://example.net
+2025-11-14 10:08:08,549 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:08:08 -0300] "GET /scrape?url=http%3A%2F%2Fexample.net HTTP/1.1" 200 1979 "-" "python-requests/2.31.0"
+2025-11-14 10:08:10,559 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:08:10,559 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:08:10,560 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:08:10 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.31.0"
+2025-11-14 10:08:10,563 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:08:10,563 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:08:10,564 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:08:10 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.31.0"
+2025-11-14 10:08:10,564 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:08:10,564 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:08:10,565 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:08:10 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.31.0"
+2025-11-14 10:08:10,565 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:08:10,565 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:08:10,566 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:08:10 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.31.0"
+2025-11-14 10:08:10,573 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:08:10,573 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:08:10,574 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:08:10 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.31.0"
+2025-11-14 10:08:10,575 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:08:10,575 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:08:10,576 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:08:10 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.31.0"
+2025-11-14 10:08:10,577 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:08:10,577 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:08:10,577 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:08:10 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.31.0"
+2025-11-14 10:08:10,582 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:08:10,582 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:08:10,583 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:08:10 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.31.0"
+2025-11-14 10:08:10,584 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:08:10,584 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:08:10,584 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:08:10 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.31.0"
+2025-11-14 10:08:10,588 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:08:10,588 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:08:10,589 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:08:10 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.31.0"
+2025-11-14 10:08:12,599 - api.handlers - INFO - Scraping request received: http://example.net
+2025-11-14 10:08:12,599 - api.handlers - INFO - Cache HIT for http://example.net
+2025-11-14 10:08:12,600 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:08:12 -0300] "GET /scrape?url=http%3A%2F%2Fexample.net HTTP/1.1" 200 1979 "-" "python-requests/2.31.0"
+2025-11-14 10:08:12,600 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:08:12,600 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:08:12,601 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:08:12 -0300] "GET /scrape?url=http%3A%2F%2Fexample.com HTTP/1.1" 200 1962 "-" "python-requests/2.31.0"
+2025-11-14 10:08:12,604 - api.handlers - INFO - Scraping request received: http://example.org
+2025-11-14 10:08:12,604 - api.handlers - INFO - Cache HIT for http://example.org
+2025-11-14 10:08:12,604 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:08:12 -0300] "GET /scrape?url=http%3A%2F%2Fexample.org HTTP/1.1" 200 1996 "-" "python-requests/2.31.0"
+2025-11-14 10:08:12,605 - api.handlers - INFO - Scraping request received: https://www.ietf.org/
+2025-11-14 10:08:12,605 - api.handlers - INFO - Cache HIT for https://www.ietf.org/
+2025-11-14 10:08:12,605 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:08:12 -0300] "GET /scrape?url=https%3A%2F%2Fwww.ietf.org%2F HTTP/1.1" 200 4741 "-" "python-requests/2.31.0"
+2025-11-14 10:08:12,609 - api.handlers - INFO - Scraping request received: https://httpbin.org/html
+2025-11-14 10:08:12,609 - api.handlers - INFO - Cache HIT for https://httpbin.org/html
+2025-11-14 10:08:12,609 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:08:12 -0300] "GET /scrape?url=https%3A%2F%2Fhttpbin.org%2Fhtml HTTP/1.1" 200 1953 "-" "python-requests/2.31.0"
+2025-11-14 10:08:17,820 - api.processing_client - WARNING - Processing server ping failed: [Errno 104] Connection reset by peer
+2025-11-14 10:08:17,820 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:08:17 -0300] "GET /health HTTP/1.1" 503 342 "-" "python-requests/2.31.0"
+2025-11-14 10:08:17,825 - api.processing_client - WARNING - Processing server ping failed: [Errno 104] Connection reset by peer
+2025-11-14 10:08:17,825 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:08:17 -0300] "GET /health HTTP/1.1" 503 342 "-" "python-requests/2.31.0"
+2025-11-14 10:08:20,909 - api.handlers - INFO - Scraping request received: http://httpbin.org/delay/35
+2025-11-14 10:08:20,909 - api.handlers - INFO - Cache HIT for http://httpbin.org/delay/35
+2025-11-14 10:08:20,910 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:08:20 -0300] "GET /scrape?url=http%3A%2F%2Fhttpbin.org%2Fdelay%2F35 HTTP/1.1" 200 1963 "-" "python-requests/2.31.0"
+2025-11-14 10:09:10,719 - api.processing_client - WARNING - Processing server ping failed: [Errno 104] Connection reset by peer
+2025-11-14 10:09:10,722 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:09:10 -0300] "GET /health HTTP/1.1" 503 342 "-" "python-requests/2.31.0"
+2025-11-14 10:09:10,725 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:09:10,726 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:09:10,726 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:09:10 -0300] "GET /scrape?url=http://example.com HTTP/1.1" 200 1962 "-" "python-requests/2.31.0"
+2025-11-14 10:09:10,729 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:09:10,729 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:09:10,729 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:09:10 -0300] "GET /scrape?url=http://example.com HTTP/1.1" 200 1962 "-" "python-requests/2.31.0"
+2025-11-14 10:09:10,732 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:09:10,732 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:09:10,732 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:09:10 -0300] "GET /scrape?url=http://example.com HTTP/1.1" 200 1962 "-" "python-requests/2.31.0"
+2025-11-14 10:09:10,735 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:09:10,735 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:09:10,736 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:09:10 -0300] "GET /scrape?url=http://example.com HTTP/1.1" 200 1962 "-" "python-requests/2.31.0"
+2025-11-14 10:09:11,744 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:09:11,744 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:09:11,745 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:09:11 -0300] "GET /scrape?url=http://example.com HTTP/1.1" 200 1962 "-" "python-requests/2.31.0"
+2025-11-14 10:09:11,749 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:09:11,749 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:09:11,750 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:09:11 -0300] "GET /scrape?url=http://example.com HTTP/1.1" 200 1962 "-" "python-requests/2.31.0"
+2025-11-14 10:09:12,257 - api.processing_client - WARNING - Processing server ping failed: [Errno 104] Connection reset by peer
+2025-11-14 10:09:12,258 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:09:12 -0300] "GET /health HTTP/1.1" 503 342 "-" "python-requests/2.31.0"
+2025-11-14 10:09:12,263 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:09:12 -0300] "GET /scrape?url=invalid HTTP/1.1" 400 241 "-" "python-requests/2.31.0"
+2025-11-14 10:09:12,768 - api.handlers - INFO - Scraping request received: http://example.com
+2025-11-14 10:09:12,768 - api.handlers - INFO - Cache HIT for http://example.com
+2025-11-14 10:09:12,769 - aiohttp.access - INFO - 127.0.0.1 [14/Nov/2025:10:09:12 -0300] "GET /scrape?url=http://example.com HTTP/1.1" 200 1962 "-" "python-requests/2.31.0"
+2025-11-14 15:33:16,690 - __main__ - INFO -  Cerrando servidor de scraping...
+2025-11-14 15:33:16,694 - __main__ - INFO - Servidor detenido
+======================================================================
+SERVIDOR DE SCRAPING WEB - TP2
+======================================================================
+ Dirección: localhost:8000
+  Workers: 4
+ Processing Server: localhost:8001
+ Protocolo: HTTP (IPv4/IPv6)
+======================================================================
+

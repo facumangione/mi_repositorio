@@ -4,6 +4,7 @@ import os
 import argparse
 import logging
 from aiohttp import web
+import socket
 
 # Agregar directorio al path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '.')))
@@ -94,14 +95,25 @@ Ejemplos:
 
 
 async def on_startup(app: web.Application):
-    logger.info(" Servidor de scraping iniciando...")
-    logger.info(f" Escuchando en: {app['host']}:{app['port']}")
-    logger.info(f" Servidor de procesamiento: {app['processing_host']}:{app['processing_port']}")
-    logger.info(f"  Workers: {app['workers']}")
+    logger.info("🚀 Servidor de scraping iniciando...")
+    logger.info(f"📡 Escuchando en: {app['host']}:{app['port']}")
+    logger.info(f"🔧 Servidor de procesamiento: {app['processing_host']}:{app['processing_port']}")
+    logger.info(f"⚙️  Workers: {app['workers']}")
 
 
 async def on_cleanup(app: web.Application):
-    logger.info(" Cerrando servidor de scraping...")
+    logger.info("🛑 Cerrando servidor de scraping...")
+
+
+def normalize_host(host: str) -> str:
+    """Normaliza el host para que funcione con IPv4 e IPv6."""
+    # Si es localhost, usar 0.0.0.0 que escucha en todas las interfaces
+    if host in ['localhost', '127.0.0.1']:
+        return '0.0.0.0'
+    # Si es ::1 (loopback IPv6), usar :: (todas las interfaces IPv6)
+    if host == '::1':
+        return '::'
+    return host
 
 
 def main():
@@ -111,14 +123,19 @@ def main():
     if args.verbose:
         logging.getLogger().setLevel(logging.DEBUG)
     
+    # Normalizar host para soportar IPv4/IPv6
+    normalized_host = normalize_host(args.ip)
+    
     # Imprimir banner
     print("=" * 70)
-    print("SERVIDOR DE SCRAPING WEB - TP2")
+    print("🌐 SERVIDOR DE SCRAPING WEB - TP2")
     print("=" * 70)
-    print(f" Dirección: {args.ip}:{args.port}")
-    print(f"  Workers: {args.workers}")
-    print(f" Processing Server: {args.processing_host}:{args.processing_port}")
-    print(f" Protocolo: HTTP (IPv4/IPv6)")
+    print(f"📍 Dirección: {args.ip}:{args.port}")
+    if normalized_host != args.ip:
+        print(f"   (Normalizado a {normalized_host} para escuchar en todas las interfaces)")
+    print(f"⚙️  Workers: {args.workers}")
+    print(f"🔧 Processing Server: {args.processing_host}:{args.processing_port}")
+    print(f"🌐 Protocolo: HTTP (IPv4/IPv6)")
     print("=" * 70)
     print()
     
@@ -128,7 +145,7 @@ def main():
         app = asyncio.run(create_app(args))
         
         # Guardar configuración para callbacks
-        app['host'] = args.ip
+        app['host'] = normalized_host
         app['port'] = args.port
         
         # Registrar callbacks
@@ -138,31 +155,31 @@ def main():
         # Iniciar servidor
         web.run_app(
             app,
-            host=args.ip,
+            host=normalized_host,
             port=args.port,
             print=lambda x: None  # Suprimir output de aiohttp
         )
         
     except OSError as e:
         if e.errno == 98:  # Address already in use
-            logger.error(f"Error: Puerto {args.port} ya está en uso")
+            logger.error(f"❌ Error: Puerto {args.port} ya está en uso")
             logger.error("   Usa 'lsof -ti:PORT | xargs kill -9' para liberar el puerto")
         elif e.errno == 99:  # Cannot assign requested address
-            logger.error(f" Error: No se puede asignar la dirección {args.ip}")
+            logger.error(f"❌ Error: No se puede asignar la dirección {args.ip}")
             logger.error("   Verifica que la dirección sea válida en tu sistema")
         else:
-            logger.error(f" Error de socket: {e}")
+            logger.error(f"❌ Error de socket: {e}")
         return 1
     
     except KeyboardInterrupt:
-        logger.info("\n  Interrumpido por el usuario")
+        logger.info("\n⚠️  Interrumpido por el usuario")
     
     except Exception as e:
-        logger.error(f" Error inesperado: {e}", exc_info=True)
+        logger.error(f"❌ Error inesperado: {e}", exc_info=True)
         return 1
     
     finally:
-        logger.info("Servidor detenido")
+        logger.info("✅ Servidor detenido")
     
     return 0
 

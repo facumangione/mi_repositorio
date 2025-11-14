@@ -1,0 +1,240 @@
+2025-11-14 10:04:54,038 - __main__ - INFO - ✅ Servidor Multiprocessing creado
+2025-11-14 10:04:54,038 - __main__ - INFO -    Workers: 4
+2025-11-14 10:04:54,038 - __main__ - INFO -    Dirección: localhost:8001
+2025-11-14 10:04:54,038 - __main__ - INFO - ✅ Servidor escuchando en: ('127.0.0.1', 8001)
+2025-11-14 10:04:56,942 - __main__ - INFO - 📨 Nueva conexión #1 de: ('127.0.0.1', 44930)
+======================================================================
+🚀 SERVIDOR DE PROCESAMIENTO - TP2 (MULTIPROCESSING REAL)
+======================================================================
+📍 Dirección: localhost:8001
+⚙️  Procesos: 4
+🔧 Arquitectura: ProcessPoolExecutor
+🌐 Protocolo: TCP/IPv4
+======================================================================
+
+✅ Servidor iniciado correctamente
+📡 Escuchando en: ('127.0.0.1', 8001)
+⚙️  Pool de 4 procesos activo
+⏹️  Presiona Ctrl+C para detener
+
+2025-11-14 10:04:56,952 - __main__ - INFO - 🔧 Proceso 180286 manejando cliente ('127.0.0.1', 44930)
+2025-11-14 10:04:56,953 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:04:56,954 - __main__ - INFO - 🔌 Proceso 180286: Conexión cerrada con ('127.0.0.1', 44930)
+2025-11-14 10:04:56,954 - __main__ - WARNING - ⚠️ Conexión #1 completada con errores
+2025-11-14 10:05:00,019 - __main__ - INFO - 📨 Nueva conexión #2 de: ('127.0.0.1', 53952)
+2025-11-14 10:05:00,021 - __main__ - INFO - 🔧 Proceso 180287 manejando cliente ('127.0.0.1', 53952)
+2025-11-14 10:05:00,022 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:05:00,022 - __main__ - INFO - 🔌 Proceso 180287: Conexión cerrada con ('127.0.0.1', 53952)
+2025-11-14 10:05:00,023 - __main__ - WARNING - ⚠️ Conexión #2 completada con errores
+2025-11-14 10:05:02,043 - __main__ - INFO - 📨 Nueva conexión #3 de: ('127.0.0.1', 53956)
+2025-11-14 10:05:02,045 - __main__ - INFO - 🔧 Proceso 180288 manejando cliente ('127.0.0.1', 53956)
+2025-11-14 10:05:02,052 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:05:02,053 - __main__ - INFO - 🔌 Proceso 180288: Conexión cerrada con ('127.0.0.1', 53956)
+2025-11-14 10:05:02,053 - __main__ - WARNING - ⚠️ Conexión #3 completada con errores
+2025-11-14 10:05:02,843 - __main__ - INFO - 📨 Nueva conexión #4 de: ('127.0.0.1', 53964)
+2025-11-14 10:05:02,844 - __main__ - INFO - 📨 Nueva conexión #5 de: ('127.0.0.1', 53980)
+2025-11-14 10:05:02,844 - __main__ - INFO - 🔧 Proceso 180289 manejando cliente ('127.0.0.1', 53964)
+2025-11-14 10:05:02,845 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:05:02,845 - __main__ - INFO - 🔧 Proceso 180286 manejando cliente ('127.0.0.1', 53980)
+2025-11-14 10:05:02,845 - __main__ - INFO - 🔌 Proceso 180289: Conexión cerrada con ('127.0.0.1', 53964)
+2025-11-14 10:05:02,845 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:05:02,845 - __main__ - INFO - 🔌 Proceso 180286: Conexión cerrada con ('127.0.0.1', 53980)
+2025-11-14 10:05:02,846 - __main__ - WARNING - ⚠️ Conexión #5 completada con errores
+2025-11-14 10:05:02,846 - __main__ - WARNING - ⚠️ Conexión #5 completada con errores
+2025-11-14 10:05:09,213 - __main__ - INFO - 📨 Nueva conexión #6 de: ('127.0.0.1', 36132)
+2025-11-14 10:05:09,216 - __main__ - INFO - 🔧 Proceso 180287 manejando cliente ('127.0.0.1', 36132)
+2025-11-14 10:05:09,217 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:05:09,218 - __main__ - INFO - 🔌 Proceso 180287: Conexión cerrada con ('127.0.0.1', 36132)
+2025-11-14 10:05:09,219 - __main__ - WARNING - ⚠️ Conexión #6 completada con errores
+2025-11-14 10:05:09,227 - __main__ - INFO - 📨 Nueva conexión #7 de: ('127.0.0.1', 36144)
+2025-11-14 10:05:09,230 - __main__ - INFO - 🔧 Proceso 180288 manejando cliente ('127.0.0.1', 36144)
+2025-11-14 10:05:09,230 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:05:09,231 - __main__ - INFO - 🔌 Proceso 180288: Conexión cerrada con ('127.0.0.1', 36144)
+2025-11-14 10:05:09,231 - __main__ - WARNING - ⚠️ Conexión #7 completada con errores
+2025-11-14 10:05:09,502 - __main__ - INFO - 📨 Nueva conexión #8 de: ('127.0.0.1', 36154)
+2025-11-14 10:05:09,503 - __main__ - INFO - 🔧 Proceso 180289 manejando cliente ('127.0.0.1', 36154)
+2025-11-14 10:05:09,503 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:05:09,504 - __main__ - INFO - 🔌 Proceso 180289: Conexión cerrada con ('127.0.0.1', 36154)
+2025-11-14 10:05:09,504 - __main__ - WARNING - ⚠️ Conexión #8 completada con errores
+2025-11-14 10:05:24,439 - __main__ - INFO - 📨 Nueva conexión #9 de: ('127.0.0.1', 56948)
+2025-11-14 10:05:24,440 - __main__ - INFO - 🔧 Proceso 180286 manejando cliente ('127.0.0.1', 56948)
+2025-11-14 10:05:24,440 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:05:24,440 - __main__ - INFO - 🔌 Proceso 180286: Conexión cerrada con ('127.0.0.1', 56948)
+2025-11-14 10:05:24,441 - __main__ - WARNING - ⚠️ Conexión #9 completada con errores
+2025-11-14 10:05:24,445 - __main__ - INFO - 📨 Nueva conexión #10 de: ('127.0.0.1', 56960)
+2025-11-14 10:05:24,446 - __main__ - INFO - 🔧 Proceso 180287 manejando cliente ('127.0.0.1', 56960)
+2025-11-14 10:05:24,446 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:05:24,446 - __main__ - INFO - 🔌 Proceso 180287: Conexión cerrada con ('127.0.0.1', 56960)
+2025-11-14 10:05:24,446 - __main__ - WARNING - ⚠️ Conexión #10 completada con errores
+2025-11-14 10:05:25,495 - __main__ - INFO - 📨 Nueva conexión #11 de: ('127.0.0.1', 56964)
+2025-11-14 10:05:25,496 - __main__ - INFO - 🔧 Proceso 180288 manejando cliente ('127.0.0.1', 56964)
+2025-11-14 10:05:25,496 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:05:25,496 - __main__ - INFO - 🔌 Proceso 180288: Conexión cerrada con ('127.0.0.1', 56964)
+2025-11-14 10:05:25,496 - __main__ - INFO - 📨 Nueva conexión #12 de: ('127.0.0.1', 56968)
+2025-11-14 10:05:25,497 - __main__ - WARNING - ⚠️ Conexión #12 completada con errores
+2025-11-14 10:05:25,497 - __main__ - INFO - 🔧 Proceso 180289 manejando cliente ('127.0.0.1', 56968)
+2025-11-14 10:05:25,498 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:05:25,498 - __main__ - INFO - 🔌 Proceso 180289: Conexión cerrada con ('127.0.0.1', 56968)
+2025-11-14 10:05:25,498 - __main__ - WARNING - ⚠️ Conexión #12 completada con errores
+2025-11-14 10:05:32,049 - __main__ - INFO - 📨 Nueva conexión #13 de: ('127.0.0.1', 40052)
+2025-11-14 10:05:32,050 - __main__ - INFO - 🔧 Proceso 180286 manejando cliente ('127.0.0.1', 40052)
+2025-11-14 10:05:32,050 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:05:32,050 - __main__ - INFO - 🔌 Proceso 180286: Conexión cerrada con ('127.0.0.1', 40052)
+2025-11-14 10:05:32,050 - __main__ - WARNING - ⚠️ Conexión #13 completada con errores
+2025-11-14 10:05:32,051 - __main__ - INFO - 📨 Nueva conexión #14 de: ('127.0.0.1', 40058)
+2025-11-14 10:05:32,051 - __main__ - INFO - 🔧 Proceso 180287 manejando cliente ('127.0.0.1', 40058)
+2025-11-14 10:05:32,051 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:05:32,052 - __main__ - INFO - 🔌 Proceso 180287: Conexión cerrada con ('127.0.0.1', 40058)
+2025-11-14 10:05:32,052 - __main__ - WARNING - ⚠️ Conexión #14 completada con errores
+2025-11-14 10:05:32,052 - __main__ - INFO - 📨 Nueva conexión #15 de: ('127.0.0.1', 40074)
+2025-11-14 10:05:32,053 - __main__ - INFO - 🔧 Proceso 180288 manejando cliente ('127.0.0.1', 40074)
+2025-11-14 10:05:32,053 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:05:32,054 - __main__ - INFO - 🔌 Proceso 180288: Conexión cerrada con ('127.0.0.1', 40074)
+2025-11-14 10:05:32,054 - __main__ - WARNING - ⚠️ Conexión #15 completada con errores
+2025-11-14 10:05:32,744 - __main__ - INFO - 📨 Nueva conexión #16 de: ('127.0.0.1', 40078)
+2025-11-14 10:05:32,745 - __main__ - INFO - 🔧 Proceso 180289 manejando cliente ('127.0.0.1', 40078)
+2025-11-14 10:05:32,746 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:05:32,746 - __main__ - INFO - 🔌 Proceso 180289: Conexión cerrada con ('127.0.0.1', 40078)
+2025-11-14 10:05:32,746 - __main__ - INFO - 📨 Nueva conexión #17 de: ('127.0.0.1', 40088)
+2025-11-14 10:05:32,746 - __main__ - WARNING - ⚠️ Conexión #17 completada con errores
+2025-11-14 10:05:32,747 - __main__ - INFO - 🔧 Proceso 180286 manejando cliente ('127.0.0.1', 40088)
+2025-11-14 10:05:32,747 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:05:32,747 - __main__ - INFO - 🔌 Proceso 180286: Conexión cerrada con ('127.0.0.1', 40088)
+2025-11-14 10:05:32,748 - __main__ - WARNING - ⚠️ Conexión #17 completada con errores
+2025-11-14 10:05:35,983 - __main__ - INFO - 📨 Nueva conexión #18 de: ('127.0.0.1', 40102)
+2025-11-14 10:05:35,984 - __main__ - INFO - 📨 Nueva conexión #19 de: ('127.0.0.1', 40114)
+2025-11-14 10:05:35,984 - __main__ - INFO - 🔧 Proceso 180287 manejando cliente ('127.0.0.1', 40102)
+2025-11-14 10:05:35,984 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:05:35,984 - __main__ - INFO - 🔌 Proceso 180287: Conexión cerrada con ('127.0.0.1', 40102)
+2025-11-14 10:05:35,984 - __main__ - WARNING - ⚠️ Conexión #19 completada con errores
+2025-11-14 10:05:35,984 - __main__ - INFO - 🔧 Proceso 180288 manejando cliente ('127.0.0.1', 40114)
+2025-11-14 10:05:35,984 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:05:35,985 - __main__ - INFO - 🔌 Proceso 180288: Conexión cerrada con ('127.0.0.1', 40114)
+2025-11-14 10:05:35,985 - __main__ - WARNING - ⚠️ Conexión #19 completada con errores
+2025-11-14 10:05:37,990 - __main__ - INFO - 📨 Nueva conexión #20 de: ('127.0.0.1', 40130)
+2025-11-14 10:05:37,991 - __main__ - INFO - 🔧 Proceso 180289 manejando cliente ('127.0.0.1', 40130)
+2025-11-14 10:05:37,991 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:05:37,992 - __main__ - INFO - 🔌 Proceso 180289: Conexión cerrada con ('127.0.0.1', 40130)
+2025-11-14 10:05:37,992 - __main__ - WARNING - ⚠️ Conexión #20 completada con errores
+2025-11-14 10:05:37,996 - __main__ - INFO - 📨 Nueva conexión #21 de: ('127.0.0.1', 40146)
+2025-11-14 10:05:37,997 - __main__ - INFO - 🔧 Proceso 180286 manejando cliente ('127.0.0.1', 40146)
+2025-11-14 10:05:37,997 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:05:37,997 - __main__ - INFO - 🔌 Proceso 180286: Conexión cerrada con ('127.0.0.1', 40146)
+2025-11-14 10:05:37,997 - __main__ - WARNING - ⚠️ Conexión #21 completada con errores
+2025-11-14 10:05:39,056 - __main__ - INFO - 📨 Nueva conexión #22 de: ('127.0.0.1', 40154)
+2025-11-14 10:05:39,057 - __main__ - INFO - 🔧 Proceso 180287 manejando cliente ('127.0.0.1', 40154)
+2025-11-14 10:05:39,057 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:05:39,058 - __main__ - INFO - 🔌 Proceso 180287: Conexión cerrada con ('127.0.0.1', 40154)
+2025-11-14 10:05:39,058 - __main__ - WARNING - ⚠️ Conexión #22 completada con errores
+2025-11-14 10:05:41,754 - __main__ - INFO - 📨 Nueva conexión #23 de: ('127.0.0.1', 37822)
+2025-11-14 10:05:41,755 - __main__ - INFO - 🔧 Proceso 180288 manejando cliente ('127.0.0.1', 37822)
+2025-11-14 10:05:41,755 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:05:41,755 - __main__ - INFO - 🔌 Proceso 180288: Conexión cerrada con ('127.0.0.1', 37822)
+2025-11-14 10:05:41,755 - __main__ - INFO - 📨 Nueva conexión #24 de: ('127.0.0.1', 37826)
+2025-11-14 10:05:41,756 - __main__ - WARNING - ⚠️ Conexión #24 completada con errores
+2025-11-14 10:05:41,757 - __main__ - INFO - 🔧 Proceso 180289 manejando cliente ('127.0.0.1', 37826)
+2025-11-14 10:05:41,757 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:05:41,757 - __main__ - INFO - 🔌 Proceso 180289: Conexión cerrada con ('127.0.0.1', 37826)
+2025-11-14 10:05:41,757 - __main__ - WARNING - ⚠️ Conexión #24 completada con errores
+2025-11-14 10:05:46,830 - __main__ - INFO - 📨 Nueva conexión #25 de: ('127.0.0.1', 37828)
+2025-11-14 10:05:46,831 - __main__ - INFO - 🔧 Proceso 180286 manejando cliente ('127.0.0.1', 37828)
+2025-11-14 10:05:46,831 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:05:46,831 - __main__ - INFO - 🔌 Proceso 180286: Conexión cerrada con ('127.0.0.1', 37828)
+2025-11-14 10:05:46,831 - __main__ - WARNING - ⚠️ Conexión #25 completada con errores
+2025-11-14 10:05:48,360 - __main__ - INFO - 📨 Nueva conexión #26 de: ('127.0.0.1', 37830)
+2025-11-14 10:05:48,361 - __main__ - INFO - 🔧 Proceso 180287 manejando cliente ('127.0.0.1', 37830)
+2025-11-14 10:05:48,361 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:05:48,361 - __main__ - INFO - 🔌 Proceso 180287: Conexión cerrada con ('127.0.0.1', 37830)
+2025-11-14 10:05:48,362 - __main__ - WARNING - ⚠️ Conexión #26 completada con errores
+2025-11-14 10:07:09,442 - __main__ - INFO - 📨 Nueva conexión #27 de: ('127.0.0.1', 38984)
+2025-11-14 10:07:09,443 - __main__ - INFO - 🔧 Proceso 180288 manejando cliente ('127.0.0.1', 38984)
+2025-11-14 10:07:09,444 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:07:09,444 - __main__ - INFO - 🔌 Proceso 180288: Conexión cerrada con ('127.0.0.1', 38984)
+2025-11-14 10:07:09,444 - __main__ - WARNING - ⚠️ Conexión #27 completada con errores
+2025-11-14 10:07:09,448 - __main__ - INFO - 📨 Nueva conexión #28 de: ('127.0.0.1', 38998)
+2025-11-14 10:07:09,451 - __main__ - INFO - 🔧 Proceso 180289 manejando cliente ('127.0.0.1', 38998)
+2025-11-14 10:07:09,451 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:07:09,452 - __main__ - INFO - 🔌 Proceso 180289: Conexión cerrada con ('127.0.0.1', 38998)
+2025-11-14 10:07:09,452 - __main__ - WARNING - ⚠️ Conexión #28 completada con errores
+2025-11-14 10:07:09,480 - __main__ - INFO - 📨 Nueva conexión #29 de: ('127.0.0.1', 39000)
+2025-11-14 10:07:09,480 - __main__ - INFO - 🔧 Proceso 180289 manejando cliente ('127.0.0.1', 39000)
+2025-11-14 10:07:09,481 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:07:09,481 - __main__ - INFO - 🔌 Proceso 180289: Conexión cerrada con ('127.0.0.1', 39000)
+2025-11-14 10:07:09,481 - __main__ - WARNING - ⚠️ Conexión #29 completada con errores
+2025-11-14 10:07:09,652 - __main__ - INFO - 📨 Nueva conexión #30 de: ('127.0.0.1', 39014)
+2025-11-14 10:07:09,653 - __main__ - INFO - 🔧 Proceso 180287 manejando cliente ('127.0.0.1', 39014)
+2025-11-14 10:07:09,654 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:07:09,654 - __main__ - INFO - 🔌 Proceso 180287: Conexión cerrada con ('127.0.0.1', 39014)
+2025-11-14 10:07:09,654 - __main__ - WARNING - ⚠️ Conexión #30 completada con errores
+2025-11-14 10:07:09,676 - __main__ - INFO - 📨 Nueva conexión #31 de: ('127.0.0.1', 39020)
+2025-11-14 10:07:09,677 - __main__ - INFO - 🔧 Proceso 180288 manejando cliente ('127.0.0.1', 39020)
+2025-11-14 10:07:09,678 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:07:09,678 - __main__ - INFO - 🔌 Proceso 180288: Conexión cerrada con ('127.0.0.1', 39020)
+2025-11-14 10:07:09,678 - __main__ - WARNING - ⚠️ Conexión #31 completada con errores
+2025-11-14 10:07:32,445 - __main__ - INFO - 📨 Nueva conexión #32 de: ('127.0.0.1', 60912)
+2025-11-14 10:07:32,446 - __main__ - INFO - 🔧 Proceso 180286 manejando cliente ('127.0.0.1', 60912)
+2025-11-14 10:07:32,446 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:07:32,446 - __main__ - INFO - 🔌 Proceso 180286: Conexión cerrada con ('127.0.0.1', 60912)
+2025-11-14 10:07:32,447 - __main__ - WARNING - ⚠️ Conexión #32 completada con errores
+2025-11-14 10:07:32,452 - __main__ - INFO - 📨 Nueva conexión #33 de: ('127.0.0.1', 60920)
+2025-11-14 10:07:32,453 - __main__ - INFO - 🔧 Proceso 180289 manejando cliente ('127.0.0.1', 60920)
+2025-11-14 10:07:32,453 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:07:32,453 - __main__ - INFO - 🔌 Proceso 180289: Conexión cerrada con ('127.0.0.1', 60920)
+2025-11-14 10:07:32,454 - __main__ - WARNING - ⚠️ Conexión #33 completada con errores
+2025-11-14 10:07:32,741 - __main__ - INFO - 📨 Nueva conexión #34 de: ('127.0.0.1', 60926)
+2025-11-14 10:07:32,742 - __main__ - INFO - 🔧 Proceso 180289 manejando cliente ('127.0.0.1', 60926)
+2025-11-14 10:07:32,742 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:07:32,742 - __main__ - INFO - 🔌 Proceso 180289: Conexión cerrada con ('127.0.0.1', 60926)
+2025-11-14 10:07:32,743 - __main__ - WARNING - ⚠️ Conexión #34 completada con errores
+2025-11-14 10:08:15,813 - __main__ - INFO - 📨 Nueva conexión #35 de: ('127.0.0.1', 36414)
+2025-11-14 10:08:15,822 - __main__ - INFO - 📨 Nueva conexión #36 de: ('127.0.0.1', 36424)
+2025-11-14 10:08:15,822 - __main__ - INFO - 🔧 Proceso 180288 manejando cliente ('127.0.0.1', 36414)
+2025-11-14 10:08:15,823 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:08:15,823 - __main__ - INFO - 🔌 Proceso 180288: Conexión cerrada con ('127.0.0.1', 36414)
+2025-11-14 10:08:15,823 - __main__ - WARNING - ⚠️ Conexión #36 completada con errores
+2025-11-14 10:08:15,823 - __main__ - INFO - 🔧 Proceso 180286 manejando cliente ('127.0.0.1', 36424)
+2025-11-14 10:08:15,823 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:08:15,823 - __main__ - INFO - 🔌 Proceso 180286: Conexión cerrada con ('127.0.0.1', 36424)
+2025-11-14 10:08:15,824 - __main__ - WARNING - ⚠️ Conexión #36 completada con errores
+2025-11-14 10:08:17,819 - __main__ - INFO - 📨 Nueva conexión #37 de: ('127.0.0.1', 36430)
+2025-11-14 10:08:17,820 - __main__ - INFO - 🔧 Proceso 180287 manejando cliente ('127.0.0.1', 36430)
+2025-11-14 10:08:17,820 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:08:17,820 - __main__ - INFO - 🔌 Proceso 180287: Conexión cerrada con ('127.0.0.1', 36430)
+2025-11-14 10:08:17,821 - __main__ - WARNING - ⚠️ Conexión #37 completada con errores
+2025-11-14 10:08:17,824 - __main__ - INFO - 📨 Nueva conexión #38 de: ('127.0.0.1', 36438)
+2025-11-14 10:08:17,825 - __main__ - INFO - 🔧 Proceso 180289 manejando cliente ('127.0.0.1', 36438)
+2025-11-14 10:08:17,825 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:08:17,825 - __main__ - INFO - 🔌 Proceso 180289: Conexión cerrada con ('127.0.0.1', 36438)
+2025-11-14 10:08:17,826 - __main__ - WARNING - ⚠️ Conexión #38 completada con errores
+2025-11-14 10:08:18,903 - __main__ - INFO - 📨 Nueva conexión #39 de: ('127.0.0.1', 36452)
+2025-11-14 10:08:18,905 - __main__ - INFO - 🔧 Proceso 180288 manejando cliente ('127.0.0.1', 36452)
+2025-11-14 10:08:18,905 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:08:18,905 - __main__ - INFO - 🔌 Proceso 180288: Conexión cerrada con ('127.0.0.1', 36452)
+2025-11-14 10:08:18,908 - __main__ - WARNING - ⚠️ Conexión #39 completada con errores
+2025-11-14 10:09:10,719 - __main__ - INFO - 📨 Nueva conexión #40 de: ('127.0.0.1', 53914)
+2025-11-14 10:09:10,720 - __main__ - INFO - 🔧 Proceso 180288 manejando cliente ('127.0.0.1', 53914)
+2025-11-14 10:09:10,720 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:09:10,720 - __main__ - INFO - 🔌 Proceso 180288: Conexión cerrada con ('127.0.0.1', 53914)
+2025-11-14 10:09:10,721 - __main__ - WARNING - ⚠️ Conexión #40 completada con errores
+2025-11-14 10:09:12,256 - __main__ - INFO - 📨 Nueva conexión #41 de: ('127.0.0.1', 53918)
+2025-11-14 10:09:12,258 - __main__ - INFO - 🔧 Proceso 180287 manejando cliente ('127.0.0.1', 53918)
+2025-11-14 10:09:12,258 - __main__ - ERROR - Error recibiendo mensaje: Conexión cerrada por el peer
+2025-11-14 10:09:12,258 - __main__ - INFO - 🔌 Proceso 180287: Conexión cerrada con ('127.0.0.1', 53918)
+2025-11-14 10:09:12,259 - __main__ - WARNING - ⚠️ Conexión #41 completada con errores
+2025-11-14 15:33:17,531 - __main__ - INFO - 🛑 Cerrando servidor...
+2025-11-14 15:33:17,532 - __main__ - INFO - Cerrando pool de procesos...
+
+⚠️ Señal 15 recibida
+
+⚠️ Señal 15 recibida
+
+⚠️ Señal 15 recibida
+
+⚠️ Señal 15 recibida
+2025-11-14 15:33:17,537 - __main__ - INFO - ✅ Servidor cerrado
+2025-11-14 15:33:17,537 - __main__ - INFO - 🛑 Cerrando servidor...
+2025-11-14 15:33:17,537 - __main__ - INFO - Cerrando pool de procesos...
+2025-11-14 15:33:17,537 - __main__ - INFO - ✅ Servidor cerrado
+2025-11-14 15:33:17,537 - __main__ - INFO - ✅ Servidor detenido
+
+⚠️ Señal 15 recibida
