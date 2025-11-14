@@ -34,6 +34,7 @@ async def create_app(args) -> web.Application:
     app.router.add_get('/scrape', scraping_handler.scrape)
     app.router.add_get('/health', scraping_handler.health)
     app.router.add_get('/info', scraping_handler.info)
+    app.router.add_get('/stats', scraping_handler.stats)
     
     return app
 
@@ -112,9 +113,9 @@ def main():
     
     # Imprimir banner
     print("=" * 70)
-    print(" SERVIDOR DE SCRAPING WEB - TP2")
+    print("SERVIDOR DE SCRAPING WEB - TP2")
     print("=" * 70)
-    print(f"Dirección: {args.ip}:{args.port}")
+    print(f" Dirección: {args.ip}:{args.port}")
     print(f"  Workers: {args.workers}")
     print(f" Processing Server: {args.processing_host}:{args.processing_port}")
     print(f" Protocolo: HTTP (IPv4/IPv6)")
@@ -144,7 +145,7 @@ def main():
         
     except OSError as e:
         if e.errno == 98:  # Address already in use
-            logger.error(f" Error: Puerto {args.port} ya está en uso")
+            logger.error(f"Error: Puerto {args.port} ya está en uso")
             logger.error("   Usa 'lsof -ti:PORT | xargs kill -9' para liberar el puerto")
         elif e.errno == 99:  # Cannot assign requested address
             logger.error(f" Error: No se puede asignar la dirección {args.ip}")

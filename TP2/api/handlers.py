@@ -1,7 +1,3 @@
-"""
-Handlers HTTP para el servidor de scraping (Parte A).
-Maneja requests de clientes y coordina con el servidor de procesamiento.
-"""
 import asyncio
 import logging
 from datetime import datetime
@@ -12,11 +8,14 @@ from scraper.async_http import AsyncHTTPClient
 from scraper.html_parser import parse_html
 from scraper.metadata_extractor import MetadataExtractor, analyze_seo
 from api.processing_client import ProcessingClient
+from common.cache import get_cache
+from common.rate_limiter import get_rate_limiter
 
 logger = logging.getLogger(__name__)
 
 
 class ScrapingHandler:
+    
     def __init__(self, app: web.Application):
         self.app = app
         self.processing_client = ProcessingClient(
@@ -27,12 +26,14 @@ class ScrapingHandler:
     async def scrape(self, request: web.Request) -> web.Response:
         # Obtener parámetros
         url = request.query.get('url')
+        force_refresh = request.query.get('refresh', '').lower() == 'true'
+        
         if not url:
             return web.json_response(
                 {
                     "status": "error",
                     "message": "URL parameter required",
-                    "usage": "GET /scrape?url=https://example.com"
+                    "usage": "GET /scrape?url=https://example.com&refresh=true"
                 },
                 status=400
             )
@@ -48,20 +49,47 @@ class ScrapingHandler:
             )
         
         logger.info(f"Scraping request received: {url}")
+        
+        # Verificar caché primero
+        cache = get_cache()
+        if not force_refresh:
+            cached = cache.get(url)
+            if cached:
+                logger.info(f"Cache HIT for {url}")
+                cached['from_cache'] = True
+                return web.json_response(cached)
+        
+        # Verificar rate limiting
+        limiter = get_rate_limiter()
+        if not limiter.can_request(url):
+            wait_time = limiter.wait_time(url)
+            logger.warning(f" Rate limit exceeded for {url}, wait {wait_time:.1f}s")
+            return web.json_response(
+                {
+                    "status": "error",
+                    "message": f"Rate limit exceeded. Please wait {wait_time:.1f} seconds",
+                    "wait_seconds": round(wait_time, 1)
+                },
+                status=429
+            )
+        
+        # Registrar request
+        limiter.record_request(url)
+        
         start_time = datetime.utcnow()
         
         try:
             # ============ FASE 1: SCRAPING LOCAL (Asyncio) ============
-            logger.info(f" Starting scraping: {url}")
+            logger.info(f"Starting scraping: {url}")
             
             async with AsyncHTTPClient(timeout=30) as client:
                 html, status_code, http_meta = await client.fetch(url)
             
-            logger.info(f" Fetched {url}: {status_code}, {len(html)} bytes")
+            logger.info(f"Fetched {url}: {status_code}, {len(html)} bytes")
             
             # Parsing HTML
             scraping_data = parse_html(html, url)
-            logger.info(f" Parsed HTML: {scraping_data['title']}")
+            logger.info(f"Parsed HTML: {scraping_data['title']}")
             
             # Metadata extendida
             metadata = MetadataExtractor.extract_all(scraping_data, url, html)
@@ -70,14 +98,14 @@ class ScrapingHandler:
             seo_analysis = analyze_seo(scraping_data)
             
             # ============ FASE 2: PROCESAMIENTO REMOTO (Servidor B) ============
-            logger.info(f" Requesting processing from Server B: {url}")
+            logger.info(f"Requesting processing from Server B: {url}")
             
             processing_data = await self.processing_client.request_processing(
                 url,
                 scraping_data
             )
             
-            logger.info(f" Processing completed for {url}")
+            logger.info(f"Processing completed for {url}")
             
             # ============ FASE 3: CONSOLIDAR RESPUESTA ============
             end_time = datetime.utcnow()
@@ -116,14 +144,18 @@ class ScrapingHandler:
                 
                 # Estado
                 "status": "success",
-                "http_status": status_code
+                "http_status": status_code,
+                "from_cache": False
             }
             
-            logger.info(f" Complete response ready for {url}")
+            # Guardar en caché
+            cache.set(url, response)
+            
+            logger.info(f"Complete response ready for {url}")
             return web.json_response(response)
         
         except asyncio.TimeoutError:
-            logger.error(f" Timeout scraping {url}")
+            logger.error(f"⏱ Timeout scraping {url}")
             return web.json_response(
                 {
                     "status": "error",
@@ -145,7 +177,7 @@ class ScrapingHandler:
             )
         
         except Exception as e:
-            logger.error(f" Error scraping {url}: {e}", exc_info=True)
+            logger.error(f"Error scraping {url}: {e}", exc_info=True)
             return web.json_response(
                 {
                     "status": "error",
@@ -175,6 +207,9 @@ class ScrapingHandler:
         return web.json_response(health_data, status=status_code)
     
     async def info(self, request: web.Request) -> web.Response:
+        cache = get_cache()
+        limiter = get_rate_limiter()
+        
         info_data = {
             "server": "TP2 Scraping Server",
             "version": "1.0.0",
@@ -182,7 +217,8 @@ class ScrapingHandler:
                 "/scrape": {
                     "method": "GET",
                     "parameters": {
-                        "url": "URL to scrape (required)"
+                        "url": "URL to scrape (required)",
+                        "refresh": "Force refresh cache (optional, true/false)"
                     },
                     "description": "Scrapes a webpage and returns structured data"
                 },
@@ -193,6 +229,10 @@ class ScrapingHandler:
                 "/info": {
                     "method": "GET",
                     "description": "Server information"
+                },
+                "/stats": {
+                    "method": "GET",
+                    "description": "Cache and rate limiting statistics"
                 }
             },
             "features": [
@@ -202,15 +242,31 @@ class ScrapingHandler:
                 "SEO analysis and scoring",
                 "Screenshot generation (via processing server)",
                 "Performance analysis",
-                "Image processing and thumbnails"
+                "Image processing and thumbnails",
+                "Rate limiting (10 req/min per domain)",
+                "Smart caching (1 hour TTL)"
             ],
             "processing_server": {
                 "host": self.app['processing_host'],
                 "port": self.app['processing_port']
-            }
+            },
+            "cache": cache.stats(),
+            "rate_limiter": limiter.stats()
         }
         
         return web.json_response(info_data)
+    
+    async def stats(self, request: web.Request) -> web.Response:
+        cache = get_cache()
+        limiter = get_rate_limiter()
+        
+        stats_data = {
+            "cache": cache.stats(),
+            "rate_limiter": limiter.stats(),
+            "timestamp": datetime.utcnow().isoformat() + "Z"
+        }
+        
+        return web.json_response(stats_data)
 
 
 async def index_handler(request: web.Request) -> web.Response:
@@ -250,11 +306,11 @@ async def index_handler(request: web.Request) -> web.Response:
         </style>
     </head>
     <body>
-        <div class="container">
+        <div clase="container">
             <h1> TP2 Web Scraping Server</h1>
             <p>Servidor de scraping distribuido con análisis asíncrono.</p>
             
-            <h2> Endpoints Disponibles</h2>
+            <h2>Endpoints Disponibles</h2>
             
             <div class="endpoint">
                 <strong>GET /scrape?url=...</strong>
@@ -274,7 +330,7 @@ async def index_handler(request: web.Request) -> web.Response:
                 <code>curl http://localhost:8000/info</code>
             </div>
             
-            <h2> Características</h2>
+            <h2>Características</h2>
             <ul>
                 <li>Scraping asíncrono con aiohttp</li>
                 <li>Análisis de estructura HTML</li>

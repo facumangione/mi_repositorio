@@ -46,13 +46,13 @@ def scrape_url(server_url: str, target_url: str):
             print(response.text)
     
     except requests.Timeout:
-        print("Timeout - La request tardó más de 60 segundos")
+        print("⏱️ Timeout - La request tardó más de 60 segundos")
     
     except requests.ConnectionError:
         print(f" Error de conexión - ¿Está el servidor corriendo en {server_url}?")
     
     except Exception as e:
-        print(f" Error: {e}")
+        print(f"Error: {e}")
 
 
 def display_results(data: dict):
@@ -63,6 +63,10 @@ def display_results(data: dict):
     print(f"Timestamp: {data.get('timestamp')}")
     print(f"Tiempo de procesamiento: {data.get('processing_time_seconds')}s")
     print(f"Status: {data.get('status')}")
+    
+    # Indicador de caché
+    if data.get('from_cache'):
+        print(f"Resultado desde CACHÉ (no se hizo scraping real)")
     
     # Datos de scraping
     scraping = data.get('scraping_data', {})
@@ -129,7 +133,7 @@ def display_results(data: dict):
             print(f" Screenshot: {screenshot_size} chars (base64)")
             print(f"  ~{screenshot_size * 3 // 4 // 1024} KB")
         elif 'screenshot_error' in processing:
-            print(f"Screenshot: Error - {processing['screenshot_error']}")
+            print(f" Screenshot: Error - {processing['screenshot_error']}")
         
         # Thumbnails
         thumbnails = processing.get('thumbnails', [])
@@ -151,7 +155,7 @@ def display_results(data: dict):
         tech = metadata['technical']
         print_section("Información Técnica")
         print(f"HTML Size: {tech.get('html_size_kb', 0)} KB")
-        print(f"HTTPS: {'' if tech.get('uses_https') else ''}")
+        print(f"HTTPS: {'✅' if tech.get('uses_https') else '❌'}")
         
         frameworks = tech.get('framework_hints', [])
         if frameworks:
@@ -159,6 +163,7 @@ def display_results(data: dict):
 
 
 def check_health(server_url: str):
+    """Verifica el estado del servidor."""
     print_header("HEALTH CHECK")
     
     try:
@@ -173,7 +178,7 @@ def check_health(server_url: str):
         print(f"\nProcessing Server:")
         print(f"  Host: {proc_server.get('host', 'N/A')}")
         print(f"  Port: {proc_server.get('port', 'N/A')}")
-        print(f"  Available: {'' if proc_server.get('available') else ''}")
+        print(f"  Available: {'✅' if proc_server.get('available') else '❌'}")
         
         return response.status_code == 200
     
@@ -203,7 +208,7 @@ def get_info(server_url: str):
             print(f"  ✓ {feature}")
     
     except Exception as e:
-        print(f" Error: {e}")
+        print(f"Error: {e}")
 
 
 def save_results(data: dict, filename: str = 'scraping_results.json'):
